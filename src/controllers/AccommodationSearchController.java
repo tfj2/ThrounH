@@ -4,6 +4,7 @@ import entities.Accommodation;
 
 import java.util.ArrayList;
 
+// setti inn return null til að losa um red ~ hell.
 public class AccommodationSearchController {
     public ArrayList<Accommodation> findByLocation() {
         return null;
