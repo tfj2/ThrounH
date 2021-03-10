@@ -3,26 +3,26 @@ package entities;
 import entities.Room.roomType;
 
 //Setti inn enum, held að það virki svona, stórir stafir því double má ekki vera með litlum
-enum roomType {
-    Single, Double, Triple, Quad, Queen, King, Twin, Studio;
-}
+
 
 public class Room {
     private String roomId;
 
-    private enum roomType
+    private enum roomType {
+        Single, Double, Triple, Quad, Queen, King, Twin, Studio;
+    }
 
-    ;
     private double price;
     private int cap;
 
-    public enum getRoomType() {
-        return roomType;
-    }
-
+    //public enum getRoomType() {
+    //    return roomType;
+    //}
+    /*
     public enum setRoomType(enum roomType) {
         this.roomType =roomType;
     }
+     */
 
     public String getRoomId() {
         return roomId;
@@ -52,7 +52,7 @@ public class Room {
         this.roomId = roomId;
         this.price = price;
         this.cap = cap;
-        this.roomType = roomType
+        this.roomType = roomType;
     }
 
 
