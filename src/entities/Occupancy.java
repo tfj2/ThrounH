@@ -3,5 +3,4 @@ package entities;
 public class Occupancy {
     private String dateFrom;
     private String dateTo;
-    private ArrayList<Room> occupancies
 }

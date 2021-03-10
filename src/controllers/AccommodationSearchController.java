@@ -1,45 +1,25 @@
 package controllers;
 
 public class AccommodationSearchController {
-
-    public void addManagerId(User user){
-
-    }
-
-    public void addRoom(Room room){
+    public ArrayList<Accommodation> findByLocation() {
 
     }
 
-    public void removeRoom(Room room){
+    public ArrayList<Accommodation> findByRating() {
 
     }
 
-    public void changeRoomPrice(Room room, double price){
+    public ArrayList<Accommodation> findByFacilities() {
 
     }
 
-    public void changeRoomType(Enum roomType){
+    public ArrayList<Accommodation> findByName() {
 
     }
 
-    public void changeRoomCapacity(Room room, int cap){
+    public ArrayList<Accommodation> findByTimePeriod() {
 
     }
 
-    public void changeLocation(Accommodation acc, String Location){
-
-    }
-
-    public void changeFacilities(Accommodation acc, String facilities){ //hvernig geyma facilities?
-
-    }
-
-    public void removeManagerId(User user){
-
-    }
-
-    public void addNewAccommodation(//Þarf að hugsa params){
-
-    }
 
 }

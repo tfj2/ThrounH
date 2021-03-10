@@ -5,7 +5,7 @@ public class User {
     private String name;
 
     public User(boolean manager, String name) {
-        manager = manager;
+        this.manager = manager;
         this.name = name;
     }
     
