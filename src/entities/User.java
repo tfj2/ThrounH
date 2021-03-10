@@ -22,7 +22,7 @@ public class User {
     }
 
     public User(boolean manager, String name) {
-        manager = manager;
+        this.manager = manager;
         this.name = name;
     }
 }
