@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+
 public class Booking {
     private User user;  //vonandi virkar thetta
     private ArrayList<String> guests; //Eigum við að hafa þetta sem arraylist?
@@ -7,6 +9,15 @@ public class Booking {
     private Room room;
     private String id;
     private String bookingDateFromTo; //Hvernig ætlum við að geyma þetta?
+
+    public Booking(User user, ArrayList<String> guests, Accommodation accommodation, Room room, String id, String bookingDateFromTo) {
+        this.user = user;
+        this.guests = guests;
+        this.accommodation = accommodation;
+        this.room = room;
+        this.id = id;
+        this.bookingDateFromTo = bookingDateFromTo;
+    }
 
     public User getUser() {
         return user;
@@ -53,15 +64,6 @@ public class Booking {
     }
 
     public void setBookingDateFromTo(String bookingDateFromTo) {
-        this.bookingDateFromTo = bookingDateFromTo;
-    }
-
-    public Booking(User user, ArrayList<String> guests, Accommodation accommodation, Room room, String id, String bookingDateFromTo) {
-        this.user = user;
-        this.guests = guests;
-        this.accommodation = accommodation;
-        this.room = room;
-        this.id = id;
         this.bookingDateFromTo = bookingDateFromTo;
     }
 }

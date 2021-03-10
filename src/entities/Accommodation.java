@@ -22,6 +22,60 @@ public class Accommodation {
         this.reviewArrayList = reviewArrayList;
         this.description = description;
     }
-    
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public ArrayList<Room> getRoomArrayList() {
+        return roomArrayList;
+    }
+
+    public void setRoomArrayList(ArrayList<Room> roomArrayList) {
+        this.roomArrayList = roomArrayList;
+    }
+
+    public ArrayList<String> getManagerIdArrayList() {
+        return managerIdArrayList;
+    }
+
+    public void setManagerIdArrayList(ArrayList<String> managerIdArrayList) {
+        this.managerIdArrayList = managerIdArrayList;
+    }
+
+    public ArrayList<Review> getReviewArrayList() {
+        return reviewArrayList;
+    }
+
+    public void setReviewArrayList(ArrayList<Review> reviewArrayList) {
+        this.reviewArrayList = reviewArrayList;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
