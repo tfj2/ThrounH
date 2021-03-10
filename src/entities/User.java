@@ -8,9 +8,9 @@ public class User {
         this.manager = manager;
         this.name = name;
     }
-    
+
     public boolean isManager() {
-        return Manager;
+        return manager;
     }
 
     public void setManager(boolean manager) {

@@ -1,14 +1,11 @@
 package entities;
 
-import entities.Room.roomType;
-
 enum RoomType {
     Single, Double, Triple, Quad, Queen, King, Twin, Studio;
 }
 
 public class Room {
     private String roomId;
-
     private RoomType roomType;
     private double price;
     private int cap;
@@ -17,8 +14,9 @@ public class Room {
         return roomType;
     }
 
-    public RoomType setRoomType(RoomType roomType) {
-        this.roomType =roomType;
+
+    public void setRoomType(RoomType roomType) {
+        this.roomType = roomType;
     }
 
     public String getRoomId() {
@@ -49,6 +47,6 @@ public class Room {
         this.roomId = roomId;
         this.price = price;
         this.cap = cap;
-        this.roomType = roomType
+        this.roomType = roomType;
     }
 }
