@@ -10,15 +10,14 @@ public class Room {
     private String roomId;
 
     private RoomType roomType;
-
     private double price;
     private int cap;
 
-    public enum getRoomType() {
+    public RoomType getRoomType() {
         return roomType;
     }
 
-    public enum setRoomType(enum roomType) {
+    public RoomType setRoomType(RoomType roomType) {
         this.roomType =roomType;
     }
 
