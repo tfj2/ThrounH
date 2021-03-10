@@ -1,4 +1,4 @@
-package Enities;
+package entities;
 
 public class Review {
     private String reviewId;

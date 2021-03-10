@@ -1,4 +1,4 @@
-package Enities;
+package entities;
 //Setti inn enum, held að það virki svona, stórir stafir því double má ekki vera með litlum
 enum roomType{
     Single, Double , Triple, Quad, Queen, King, Twin, Double-Double, Studio;
