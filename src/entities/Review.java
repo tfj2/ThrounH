@@ -1,10 +1,19 @@
-package Enities;
+package entities;
+
+import java.util.ArrayList;
 
 public class Review {
     private String reviewId;
     private String comment;
     private Double stars;
     private ArrayList<String> replies;
+
+    public Review(String reviewId, String comment, Double stars, ArrayList<String> replies) {
+        this.reviewId = reviewId;
+        this.comment = comment;
+        this.stars = stars;
+        this.replies = replies;
+    }
 
     public String getReviewId() {
         return reviewId;
@@ -35,13 +44,6 @@ public class Review {
     }
 
     public void setReplies(ArrayList<String> replies) {
-        this.replies = replies;
-    }
-
-    public Review(String reviewId, String comment, Double stars, ArrayList<String> replies) {
-        this.reviewId = reviewId;
-        this.comment = comment;
-        this.stars = stars;
         this.replies = replies;
     }
 }
