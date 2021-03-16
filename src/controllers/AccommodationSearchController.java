@@ -1,10 +1,13 @@
 package controllers;
 
 import entities.Accommodation;
+import javafx.fxml.FXML;
 
 import java.util.ArrayList;
 
 public class AccommodationSearchController {
+
+
     public ArrayList<Accommodation> findByLocation() {
         return null;
     }
@@ -25,5 +28,12 @@ public class AccommodationSearchController {
         return null;
     }
 
+    //@FXML
+    public void searchButtonPressed() {
+        System.out.println("We do be searching tho");
+    }
 
+    public static void main (String[] args) {
+        System.out.println("We in this b");
+    }
 }
