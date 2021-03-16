@@ -12,7 +12,7 @@
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView fx:id="HotelList" prefHeight="400.0" prefWidth="200.0" />
+            <ListView fx:id="hotelList" prefHeight="400.0" prefWidth="200.0" />
             <Label layoutX="75.0" layoutY="26.0" text="Hotel List" />
          </children>
       </AnchorPane>
@@ -22,8 +22,8 @@
          <children>
             <AnchorPane layoutX="100.0" layoutY="200.0" prefHeight="200.0" prefWidth="400.0">
                <children>
-                  <ListView fx:id="RoomList" prefHeight="200.0" prefWidth="203.0" />
-                  <ListView fx:id="RoomPropertyList" layoutX="200.0" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="roomList" prefHeight="200.0" prefWidth="203.0" />
+                  <ListView fx:id="roomPropertyList" layoutX="200.0" prefHeight="200.0" prefWidth="200.0" />
                   <Label layoutX="88.0" layoutY="14.0" text="Room List" />
                   <Label layoutX="256.0" layoutY="14.0" text="Room Properties" />
                </children>
@@ -31,12 +31,12 @@
             <Label layoutX="180.0" layoutY="54.0" text="Hotel:" />
             <Label layoutX="171.0" layoutY="99.0" text="Location:" />
             <Label layoutX="265.0" layoutY="28.0" text="Search" />
-            <TextField fx:id="HotelTextField" layoutX="227.0" layoutY="50.0" />
-            <TextField fx:id="LocationTextField" layoutX="226.0" layoutY="95.0" />
-            <TextField fx:id="PriceTextField" layoutX="227.0" layoutY="137.0" />
+            <TextField fx:id="hotelTextField" layoutX="227.0" layoutY="50.0" />
+            <TextField fx:id="locationTextField" layoutX="226.0" layoutY="95.0" />
+            <TextField fx:id="priceTextField" layoutX="227.0" layoutY="137.0" />
             <Label layoutX="181.0" layoutY="141.0" text="Price:" />
-            <Button fx:id="SearchButton" layoutX="323.0" layoutY="169.0" mnemonicParsing="false" onAction="#searchButtonPressed" text="Search" />
-            <Button fx:id="BookButton" layoutX="434.0" layoutY="169.0" mnemonicParsing="false" text="Book" />
+            <Button fx:id="searchButton" layoutX="323.0" layoutY="169.0" mnemonicParsing="false" onAction="#searchButtonPressed" text="Search" />
+            <Button fx:id="bookButton" layoutX="434.0" layoutY="169.0" mnemonicParsing="false" text="Book" />
             <ChoiceBox layoutX="390.0" layoutY="137.0" prefHeight="25.0" prefWidth="88.0" />
          </children>
       </AnchorPane>
