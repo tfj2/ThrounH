@@ -13,6 +13,7 @@ public class Accommodation {
     private ArrayList<Review> reviewArrayList;
     private String description;
 
+    // ma baeta vid minni smidum,
     public Accommodation(String id, String location, double rating, ArrayList<Room> roomArrayList, ArrayList<String> managerIdArrayList, ArrayList<Review> reviewArrayList, String description) {
         this.id = id;
         this.location = location;
@@ -21,6 +22,16 @@ public class Accommodation {
         this.managerIdArrayList = managerIdArrayList;
         this.reviewArrayList = reviewArrayList;
         this.description = description;
+    }
+
+    public Accommodation(String id, String location, ArrayList<Room> roomArrayList, ArrayList<String> managerIdArrayList) {
+        this.id = id;
+        this.location = location;
+        this.rating = 0;
+        this.roomArrayList = roomArrayList;
+        this.managerIdArrayList = managerIdArrayList;
+        this.reviewArrayList = new ArrayList<>();
+        this.description = "";
     }
 
     public String getId() {

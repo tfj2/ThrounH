@@ -1,17 +1,18 @@
 package controllers;
 
+import entities.Booking;
+
 public class BookingController {
-    public void addBooking() {
+
+    public void addBooking(Booking booking){
 
     }
 
-    public void removeBooking() {
+    public void removeBooking(Booking booking){
 
     }
 
-    public void changeBooking() {
+    public void changeBooking(Booking booking){
 
     }
-
-
 }

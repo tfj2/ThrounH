@@ -2,9 +2,10 @@ package controllers;
 
 import entities.Accommodation;
 import javafx.fxml.FXML;
-
 import java.util.ArrayList;
 
+
+// setti inn return null til að losa um red ~ hell.
 public class AccommodationSearchController {
 
 
@@ -28,7 +29,7 @@ public class AccommodationSearchController {
         return null;
     }
 
-    //@FXML
+    @FXML
     public void searchButtonPressed() {
         System.out.println("We do be searching tho");
     }
