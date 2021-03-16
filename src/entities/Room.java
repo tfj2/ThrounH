@@ -14,7 +14,6 @@ public class Room {
         return roomType;
     }
 
-
     public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
     }
@@ -49,4 +48,5 @@ public class Room {
         this.cap = cap;
         this.roomType = roomType;
     }
+    
 }
