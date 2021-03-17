@@ -48,5 +48,5 @@ public class Room {
         this.cap = cap;
         this.roomType = roomType;
     }
-    
 }
+//siggigauti/video-leiga-support

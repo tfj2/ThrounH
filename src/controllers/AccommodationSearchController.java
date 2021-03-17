@@ -15,17 +15,7 @@ import java.util.ResourceBundle;
 
 
 // setti inn return null til að losa um red ~ hell.
-public class AccommodationSearchController implements Initializable {
-    @FXML
-    private Button searchButton;
-    @FXML
-    private ListView hotelList;
-    @FXML
-    private TextField hotelTextField;
-
-    //o.fl.
-    // breyta type í user eða annað
-    private ObservableList<String> fyrstiListi = FXCollections.observableArrayList();
+public class AccommodationSearchController {
 
     // private DataFactory = new DataFactory();
 
@@ -47,21 +37,6 @@ public class AccommodationSearchController implements Initializable {
 
     public ArrayList<Accommodation> findByTimePeriod() {
         return null;
-    }
-
-    @FXML
-    public void searchButtonPressed() {
-        System.out.println("We do be searching tho");
-    }
-
-    @Override
-    public void initialize(URL LOCATION, ResourceBundle resources) {
-        System.out.println("out");
-        fyrstiListi.add("Hallo");
-        fyrstiListi.add("er");
-        fyrstiListi.add("rett");
-
-        hotelList.setItems(fyrstiListi);
     }
 
 }
