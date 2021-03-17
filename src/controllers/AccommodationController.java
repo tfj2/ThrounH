@@ -1,8 +1,10 @@
+
 package controllers;
 
 import entities.Accommodation;
-import entities.Room;
+import entities.Room;;
 import entities.User;
+
 
 public class AccommodationController {
 
@@ -22,9 +24,9 @@ public class AccommodationController {
 
     }
 
-    public void changeRoomType(Enum roomType) {
+   // public void changeRoomType(RoomType roomType) {
 
-    }
+   // }
 
     public void changeRoomCapacity(Room room, int cap) {
 
@@ -39,3 +41,4 @@ public class AccommodationController {
     }
 
 }
+
