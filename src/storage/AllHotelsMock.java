@@ -4,7 +4,8 @@ import entities.Accommodation;
 
 import java.util.ArrayList;
 
-public class AllHotelsMock implements DatabaseService {
+public class AllHotelsMock implements Database {
+    // láta DataFactory skila röðum eins og database myndi gera?
     private DataFactory fakeData = new DataFactory();
     ArrayList<Accommodation> allHotels = fakeData.getAccommodationsSmallConstructor();
     @Override

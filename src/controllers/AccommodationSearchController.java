@@ -2,7 +2,7 @@ package controllers;
 
 import entities.Accommodation;
 import storage.AllHotelsMock;
-import storage.DatabaseService;
+import storage.Database;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 
 public class AccommodationSearchController {
-    private DatabaseService data = new AllHotelsMock();
+    private Database data = new AllHotelsMock();
     private ArrayList<Accommodation>  accommodations = data.query("");
 
     public AccommodationSearchController() {
@@ -18,7 +18,13 @@ public class AccommodationSearchController {
     }
 
     public ArrayList<Accommodation> findByLocation(String query) {
+        // hér er ekki verið að gera ráð fyrir því að fá raðir úr sql query sbr. sequence diagram.
+        // hér væri kannski loop til að bua til Accommodation obj úr niðurstöðum gagnagrunns
+
+
         ArrayList<Accommodation> result = new ArrayList<>();
+
+        // kannski reduntant loopa ef við látum sql sjá um leitina ?
         for (Accommodation acc : accommodations) {
             // contains er case sensitive, gerum leitina það ekki
             if(acc.getLocation().toLowerCase().contains(query.toLowerCase())) {
