@@ -4,18 +4,20 @@ import java.util.ArrayList;
 
 public class Accommodation {
     private String id;
+    private String name;
     // private ArrayList<>; // arraylist fyrir facilities
     private String location;
     private double rating;
     private ArrayList<Room> roomArrayList;
-    //private enum Type; // kann ekki enum syntax
+    private AccType type = AccType.Hotel;
     private ArrayList<String> managerIdArrayList;
     private ArrayList<Review> reviewArrayList;
     private String description;
 
     // ma baeta vid minni smidum,
-    public Accommodation(String id, String location, double rating, ArrayList<Room> roomArrayList, ArrayList<String> managerIdArrayList, ArrayList<Review> reviewArrayList, String description) {
+    public Accommodation(String id, String name, String location, double rating, ArrayList<Room> roomArrayList, ArrayList<String> managerIdArrayList, ArrayList<Review> reviewArrayList, String description) {
         this.id = id;
+        this.name = name;
         this.location = location;
         this.rating = rating;
         this.roomArrayList = roomArrayList;
@@ -24,8 +26,9 @@ public class Accommodation {
         this.description = description;
     }
 
-    public Accommodation(String id, String location, ArrayList<Room> roomArrayList, ArrayList<String> managerIdArrayList) {
+    public Accommodation(String id, String name, String location, ArrayList<Room> roomArrayList, ArrayList<String> managerIdArrayList) {
         this.id = id;
+        this.name = name;
         this.location = location;
         this.rating = 0;
         this.roomArrayList = roomArrayList;
@@ -88,5 +91,9 @@ public class Accommodation {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String toString() {
+        return this.name;
     }
 }

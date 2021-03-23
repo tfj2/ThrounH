@@ -1,42 +1,50 @@
 package controllers;
 
 import entities.Accommodation;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import sample.DataFactory;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 
-// setti inn return null til að losa um red ~ hell.
+
 public class AccommodationSearchController {
+    public AccommodationSearchController() {
 
-    // private DataFactory = new DataFactory();
+    }
 
-    public ArrayList<Accommodation> findByLocation() {
+    // breyta í mock object sem DataFactory Implementar?
+    private DataFactory data = new DataFactory();
+    // allar accommodations sem controller veit af
+    private ObservableList<Accommodation>  accommodations = data.getAccommodations();
+
+    public ArrayList<Accommodation> findByLocation(String query) {
+        ArrayList<Accommodation> result = new ArrayList<>();
+        for (Accommodation acc : accommodations) {
+            if(acc.getLocation().contains(query)) {
+                result.add(acc);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<Accommodation> findByRating(String query) {
         return null;
     }
 
-    public ArrayList<Accommodation> findByRating() {
+    public ArrayList<Accommodation> findByFacilities(String query) {
         return null;
     }
 
-    public ArrayList<Accommodation> findByFacilities() {
+    public ArrayList<Accommodation> findByName(String query) {
         return null;
     }
 
-    public ArrayList<Accommodation> findByName() {
+    public ArrayList<Accommodation> findByTimePeriod(String query) {
         return null;
     }
+    public static void main(String[] args) {
 
-    public ArrayList<Accommodation> findByTimePeriod() {
-        return null;
     }
 
 }

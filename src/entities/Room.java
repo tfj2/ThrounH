@@ -1,9 +1,5 @@
 package entities;
 
-enum RoomType {
-    Single, Double, Triple, Quad, Queen, King, Twin, Studio;
-}
-
 public class Room {
     private String roomId;
     private RoomType roomType;
