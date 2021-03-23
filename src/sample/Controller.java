@@ -33,8 +33,6 @@ public class Controller implements Initializable {
 
     @FXML
     public void searchButtonPressed() {
-        // taka inn checkboxes perhamps og athuga hvernig haga eigi leitinni
-        // byrja að útfæra leitina sem var í sequence diagram (?)
 
         String locationQuery = locationTextField.getCharacters().toString();
         // String nameQuery = hotelTextField.getCharacters().toString();
