@@ -1,8 +1,8 @@
 package controllers;
 
 import entities.Accommodation;
-import javafx.collections.ObservableList;
-import sample.DataFactory;
+import storage.AllHotelsMock;
+import storage.DatabaseService;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -10,19 +10,18 @@ import java.util.ArrayList;
 
 
 public class AccommodationSearchController {
+    private DatabaseService data = new AllHotelsMock();
+    private ArrayList<Accommodation>  accommodations = data.query("");
+
     public AccommodationSearchController() {
 
     }
 
-    // breyta í mock object sem DataFactory Implementar?
-    private DataFactory data = new DataFactory();
-    // allar accommodations sem controller veit af
-    private ObservableList<Accommodation>  accommodations = data.getAccommodations();
-
     public ArrayList<Accommodation> findByLocation(String query) {
         ArrayList<Accommodation> result = new ArrayList<>();
         for (Accommodation acc : accommodations) {
-            if(acc.getLocation().contains(query)) {
+            // contains er case sensitive, gerum leitina það ekki
+            if(acc.getLocation().toLowerCase().contains(query.toLowerCase())) {
                 result.add(acc);
             }
         }

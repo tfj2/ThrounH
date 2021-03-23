@@ -1,4 +1,4 @@
-package sample;
+package storage;
 
 import entities.Accommodation;
 import entities.Room;
@@ -12,26 +12,35 @@ public class DataFactory {
     public DataFactory() {
     }
 
-    public ObservableList<Accommodation> getAccommodations() {
-        ObservableList<Accommodation> accommodations = FXCollections.observableArrayList();
+    public ArrayList<Accommodation> getAccommodationsSmallConstructor() {
+        ArrayList<Accommodation> accommodations = new ArrayList<>();
         ArrayList<Room> rooms = getRooms();
         ArrayList<String> managerIds = new ArrayList<>();
         managerIds.add("1");
         managerIds.add("2");
-
         Accommodation acc1 = new Accommodation("1","Hilton", "Reykjavik", rooms, managerIds);
         Accommodation acc2 = new Accommodation("2","Kea", "Akureyri", rooms, managerIds);
         Accommodation acc3 = new Accommodation("3","Hotel Selfoss", "Selfoss", rooms, managerIds);
         Accommodation acc4 = new Accommodation("4","Grand", "Reykjavik", rooms, managerIds);
         Accommodation acc5 = new Accommodation("5","Kjarnalundur", "Akureyri", rooms, managerIds);
-
+        Accommodation acc6 = new Accommodation("6","Hotel Cabin", "Reykjavik", rooms, managerIds);
+        Accommodation acc7 = new Accommodation("7","Nordica", "Reykjavik", rooms, managerIds);
+        Accommodation acc8 = new Accommodation("8","Midgardur", "Reykjavik", rooms, managerIds);
+        Accommodation acc9 = new Accommodation("9","201 Hotel", "Reykjavik", rooms, managerIds);
+        Accommodation acc10 = new Accommodation("10","Alda", "Reykjavik", rooms, managerIds);
         accommodations.add(acc1);
         accommodations.add(acc2);
         accommodations.add(acc3);
         accommodations.add(acc4);
         accommodations.add(acc5);
+        accommodations.add(acc6);
+        accommodations.add(acc7);
+        accommodations.add(acc8);
+        accommodations.add(acc9);
+        accommodations.add(acc10);
         return accommodations;
     }
+
 
     public ArrayList<Room> getRooms() {
         ArrayList<Room> rooms = new ArrayList<>();
@@ -46,4 +55,5 @@ public class DataFactory {
         rooms.add(new Room("9", 14000, RoomType.King, 3));
         return rooms;
     }
+
 }

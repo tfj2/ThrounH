@@ -1,16 +1,15 @@
 package sample;
 
 import controllers.AccommodationSearchController;
+import storage.DataFactory;
 import entities.Accommodation;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -29,7 +28,7 @@ public class Controller implements Initializable {
     @FXML
     private TextField locationTextField;
 
-    public ObservableList<Accommodation> accommodationsShown = FXCollections.observableArrayList();
+    public ArrayList<Accommodation> accommodationsShown = new ArrayList<>();
 
     @FXML
     public void searchButtonPressed() {
@@ -45,9 +44,8 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL LOCATION, ResourceBundle resources) {
-        accommodationsShown = data.getAccommodations();
+        accommodationsShown = data.getAccommodationsSmallConstructor();
 
-
-        hotelList.setItems(accommodationsShown);
+        hotelList.setItems(FXCollections.observableArrayList(accommodationsShown));
     }
 }
