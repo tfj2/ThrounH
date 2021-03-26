@@ -9,8 +9,13 @@ public class AllHotelsMock implements Database {
     private DataFactory fakeData = new DataFactory();
     ArrayList<Accommodation> allHotels = fakeData.getAccommodationsSmallConstructor();
     @Override
-    public ArrayList<Accommodation> query(String q) {
+    public ArrayList<Accommodation> getAllHotels(String q) {
         ArrayList<Accommodation> allHotels = fakeData.getAccommodationsSmallConstructor();
         return allHotels;
     }
+    @Override
+    public ArrayList<Accommodation> getHotelsByLocation(String location) {
+        return allHotels;
+    }
 }
+// database implementation og mockimplementation

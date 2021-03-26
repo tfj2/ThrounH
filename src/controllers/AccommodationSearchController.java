@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 
 public class AccommodationSearchController {
-    private Database data = new AllHotelsMock();
-    private ArrayList<Accommodation>  accommodations = data.query("");
+    private Database data;
+    private ArrayList<Accommodation>  accommodations;
 
-    public AccommodationSearchController() {
-
+    public AccommodationSearchController(Database data) {
+        this.data = data;
     }
 
     public ArrayList<Accommodation> findByLocation(String query) {
