@@ -33,6 +33,7 @@ public class AccommodationSearchControllerTest {
 
     @Test
     public void testFindByLocationCaseInsensitive() {
+        assertEquals(sc.findByLocation("rEykjavik"), sc.findByLocation("Reykjavik"));
 
     }
 
