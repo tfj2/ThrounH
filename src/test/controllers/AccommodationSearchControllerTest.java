@@ -4,14 +4,15 @@ import controllers.AccommodationSearchController;
 import entities.Accommodation;
 import entities.Room;
 import entities.RoomType;
-import org.junit.*;
-import storage.DatabaseMockEmpty;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import storage.DatabaseMock;
 
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 
 
 public class AccommodationSearchControllerTest {
@@ -33,10 +34,10 @@ public class AccommodationSearchControllerTest {
         managerIds.add("1");
         managerIds.add("2");
 
-        acc1 = new Accommodation("1","Hilton", "Reykjavik", rooms, managerIds);
-        acc2 = new Accommodation("2","Kea", "Akureyri", rooms, managerIds);
-        acc3 = new Accommodation("3","Hotel Selfoss", "Selfoss", rooms, managerIds);
-        acc4 = new Accommodation("4","Grand Hotel", "Reykjavik", rooms, managerIds);
+        acc1 = new Accommodation("1", "Hilton", "Reykjavik", rooms, managerIds);
+        acc2 = new Accommodation("2", "Kea", "Akureyri", rooms, managerIds);
+        acc3 = new Accommodation("3", "Hotel Selfoss", "Selfoss", rooms, managerIds);
+        acc4 = new Accommodation("4", "Grand Hotel", "Reykjavik", rooms, managerIds);
 
         mockData.add(acc1);
         mockData.add(acc2);
@@ -45,10 +46,12 @@ public class AccommodationSearchControllerTest {
 
         sc = new AccommodationSearchController(new DatabaseMock(mockData));
     }
+
     @After
     public void tearDown() {
         // þurfum ekki
     }
+
     @Test
     public void testFindByLocationEmptySearch() {
         assertEquals(empty, sc.findByLocation(""));
@@ -101,7 +104,7 @@ public class AccommodationSearchControllerTest {
     }
 
     @Test
-    public void testFindByMultiple() {
+    public void testFindByNameAndLocation() {
         ArrayList<Accommodation> byName = sc.findByName("Hotel");
         ArrayList<Accommodation> byLocation = sc.findByLocation("Reykjavik");
         // sniðmengi.
@@ -110,5 +113,15 @@ public class AccommodationSearchControllerTest {
         assertEquals(byName.get(0), acc4);
     }
 
-    //10 til 13 test cases fyrir um það bil 3 föll
+    @Test
+    public void testFindByNameAndLocationNoResults() {
+        ArrayList<Accommodation> byName = sc.findByName("kea");
+        ArrayList<Accommodation> byLocation = sc.findByLocation("Selfoss");
+
+        byName.retainAll(byLocation);
+
+        // Ef sniðmengi er að stærð 0.
+        assertNotNull(byName);
+        assertEquals(byName.size(), 0);
+    }
 }
