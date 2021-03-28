@@ -99,10 +99,12 @@ public class AccommodationSearchControllerTest {
     @Test
     public void testFindByRatingNegative() {
         ArrayList<Accommodation> result1 = sc.findByRating(-1);
+        // db mun breyta neikvæðum tölum í 0 áður en leit hefst, og mundi þá skila öllum
+        assertEquals(result1, mockData);
     }
 
     @Test
-    public void testFindByMultiple() {
+    public void testFindByNameAndLocation() {
         ArrayList<Accommodation> byName = sc.findByName("Hotel");
         ArrayList<Accommodation> byLocation = sc.findByLocation("Reykjavik");
         // sniðmengi.
@@ -111,17 +113,15 @@ public class AccommodationSearchControllerTest {
         assertEquals(byName.get(0), acc4);
     }
 
-    // Ef sniðmengi er að stærð 0.
     @Test
-    public void testFindByNameAndRating() {
+    public void testFindByNameAndLocationNoResults() {
         ArrayList<Accommodation> byName = sc.findByName("kea");
         ArrayList<Accommodation> byLocation = sc.findByLocation("Selfoss");
 
         byName.retainAll(byLocation);
 
+        // Ef sniðmengi er að stærð 0.
         assertNotNull(byName);
         assertEquals(byName.size(), 0);
     }
-
-    //10 til 13 test cases fyrir um það bil 3 föll
 }

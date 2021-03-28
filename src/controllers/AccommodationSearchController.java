@@ -19,16 +19,6 @@ public class AccommodationSearchController {
 
     public ArrayList<Accommodation> findByLocation(String location) {
         return data.getHotelsByLocation(location);
-        /*
-        // kannski reduntant loopa ef við látum sql sjá um leitina ?
-        jaa beila á þetta og láta query sja um
-        for (Accommodation acc : accommodations) {
-            // contains er case sensitive, gerum leitina það ekki
-            if(acc.getLocation().toLowerCase().contains(query.toLowerCase())) {
-                result.add(acc);
-            }
-        }
-        return result; */
     }
 
     public ArrayList<Accommodation> findByRating(double minRating) {

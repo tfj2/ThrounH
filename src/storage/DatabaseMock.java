@@ -19,6 +19,7 @@ public class DatabaseMock implements Database {
     public ArrayList<Accommodation> getHotelsByLocation(String location) {
         // sql mun sjá um þetta þegar database er implementað
         ArrayList<Accommodation> result = new ArrayList<>();
+        if (location.equals("")) { return result; };
         for (Accommodation acc : accommodations) {
             // contains er case sensitive, gerum leitina það ekki
             if(acc.getLocation().toLowerCase().contains(location.toLowerCase())) {
@@ -32,6 +33,7 @@ public class DatabaseMock implements Database {
     public ArrayList<Accommodation> getHotelsByName(String name) {
         // sql mun sjá um þetta þegar database er implementað
         ArrayList<Accommodation> result = new ArrayList<>();
+        if (name.equals("")) { return result; };
         for (Accommodation acc : accommodations) {
             // contains er case sensitive, gerum leitina það ekki
             if(acc.getName().toLowerCase().contains(name.toLowerCase())) {
