@@ -1,67 +1,57 @@
 package controllers;
 
 import entities.Accommodation;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import storage.Database;
 
-import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 
-// setti inn return null til að losa um red ~ hell.
-public class AccommodationSearchController implements Initializable {
-    @FXML
-    private Button searchButton;
-    @FXML
-    private ListView hotelList;
-    @FXML
-    private TextField hotelTextField;
+public class AccommodationSearchController {
+    private Database data;
+    private ArrayList<Accommodation>  accommodations;
 
-    //o.fl.
-    // breyta type í user eða annað
-    private ObservableList<String> fyrstiListi = FXCollections.observableArrayList();
+    public AccommodationSearchController(Database data) {
 
-    // private DataFactory = new DataFactory();
+        this.data = data;
+        accommodations = data.getAllHotels();
+    }
 
-    public ArrayList<Accommodation> findByLocation() {
+    public ArrayList<Accommodation> findByLocation(String location) {
+        return data.getHotelsByLocation(location);
+        /*
+        // kannski reduntant loopa ef við látum sql sjá um leitina ?
+        jaa beila á þetta og láta query sja um
+        for (Accommodation acc : accommodations) {
+            // contains er case sensitive, gerum leitina það ekki
+            if(acc.getLocation().toLowerCase().contains(query.toLowerCase())) {
+                result.add(acc);
+            }
+        }
+        return result; */
+    }
+
+    public ArrayList<Accommodation> findByRating(double minRating) {
+        return data.getHotelsByRating(minRating);
+    }
+
+    public ArrayList<Accommodation> findByFacilities(String query) {
         return null;
     }
 
-    public ArrayList<Accommodation> findByRating() {
+    public ArrayList<Accommodation> findByPrice(String query) {
         return null;
     }
 
-    public ArrayList<Accommodation> findByFacilities() {
+    public ArrayList<Accommodation> findByName(String name) {
+        return data.getHotelsByName(name);
+    }
+
+    public ArrayList<Accommodation> findByTimePeriod(Date from, Date to) {
         return null;
     }
 
-    public ArrayList<Accommodation> findByName() {
-        return null;
+    public static void main(String[] args) {
+
     }
-
-    public ArrayList<Accommodation> findByTimePeriod() {
-        return null;
-    }
-
-    @FXML
-    public void searchButtonPressed() {
-        System.out.println("We do be searching tho");
-    }
-
-    @Override
-    public void initialize(URL LOCATION, ResourceBundle resources) {
-        System.out.println("out");
-        fyrstiListi.add("Hallo");
-        fyrstiListi.add("er");
-        fyrstiListi.add("rett");
-
-        hotelList.setItems(fyrstiListi);
-    }
-
 }

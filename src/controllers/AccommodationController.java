@@ -39,6 +39,5 @@ public class AccommodationController {
     public void changeFacilities(Accommodation acc, String facilities) { //hvernig geyma facilities?
 
     }
-
 }
 
