@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import storage.DataFactory;
 import storage.DatabaseMockNonEmptyQuery;
 
 import java.net.URL;
@@ -16,7 +17,7 @@ import java.util.ResourceBundle;
 
 // View Controller sem bregst við view ot talar við controller
 public class Controller implements Initializable {
-    private DatabaseMockNonEmptyQuery data = new DatabaseMockNonEmptyQuery();
+    private DatabaseMockNonEmptyQuery data = new DatabaseMockNonEmptyQuery(new DataFactory().getAllHotels());
 
     private AccommodationSearchController searchController = new AccommodationSearchController(data);
     @FXML

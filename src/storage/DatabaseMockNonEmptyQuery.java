@@ -7,9 +7,8 @@ import java.util.ArrayList;
 public class DatabaseMockNonEmptyQuery implements Database {
     ArrayList<Accommodation> accommodations;
 
-    public DatabaseMockNonEmptyQuery() {
-        DataFactory fakeData = new DataFactory();
-        accommodations = fakeData.getAllHotels();
+    public DatabaseMockNonEmptyQuery(ArrayList<Accommodation> mockData) {
+        this.accommodations = mockData;
     }
 
     @Override

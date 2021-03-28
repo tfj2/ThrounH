@@ -8,8 +8,8 @@ public class DatabaseMockEmptyQuery implements Database {
 
     ArrayList<Accommodation> accommodations;
 
-    public DatabaseMockEmptyQuery() {
-        accommodations = new ArrayList<>();
+    public DatabaseMockEmptyQuery(ArrayList<Accommodation> mockData) {
+        this.accommodations = mockData;
     }
 
     @Override
