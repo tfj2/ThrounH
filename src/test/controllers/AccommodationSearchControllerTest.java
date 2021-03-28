@@ -8,6 +8,7 @@ import org.junit.*;
 import storage.DatabaseMockEmptyQuery;
 import storage.DatabaseMockNonEmptyQuery;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
@@ -17,21 +18,25 @@ import static org.junit.Assert.assertNull;
 public class AccommodationSearchControllerTest {
     AccommodationSearchController sc;
     AccommodationSearchController sce;
+    ArrayList<Accommodation> mockData = new ArrayList<>();
+    Accommodation acc1;
+    Accommodation acc2;
+    Accommodation acc3;
+    Accommodation acc4;
+
     @Before
     public void setUp() {
         ArrayList<Room> rooms = new ArrayList<>();
         rooms.add(new Room("1", 10000, RoomType.Single, 1));
 
-        ArrayList<Accommodation> mockData = new ArrayList<>();
-
         ArrayList<String> managerIds = new ArrayList<>();
         managerIds.add("1");
         managerIds.add("2");
 
-        Accommodation acc1 = new Accommodation("1","Hilton", "Reykjavik", rooms, managerIds);
-        Accommodation acc2 = new Accommodation("2","Kea", "Akureyri", rooms, managerIds);
-        Accommodation acc3 = new Accommodation("3","Hotel Selfoss", "Selfoss", rooms, managerIds);
-        Accommodation acc4 = new Accommodation("4","Grand Hotel", "Reykjavik", rooms, managerIds);
+        acc1 = new Accommodation("1","Hilton", "Reykjavik", rooms, managerIds);
+        acc2 = new Accommodation("2","Kea", "Akureyri", rooms, managerIds);
+        acc3 = new Accommodation("3","Hotel Selfoss", "Selfoss", rooms, managerIds);
+        acc4 = new Accommodation("4","Grand Hotel", "Reykjavik", rooms, managerIds);
 
         mockData.add(acc1);
         mockData.add(acc2);
@@ -68,7 +73,7 @@ public class AccommodationSearchControllerTest {
 
     @Test
     public void testFindByNameSubSearch() {
-
+        assertEquals(sce.findByName("hot"), sce.findByName("hotel"));
     }
 
     @Test
@@ -78,12 +83,23 @@ public class AccommodationSearchControllerTest {
 
     @Test
     public void testFindByRating() {
+        ArrayList<Accommodation> result1 = sc.findByRating(-1);
+        ArrayList<Accommodation> result2 = sc.findByRating(0);
+        ArrayList<Accommodation> result3 = sc.findByRating(1);
 
+        ArrayList<Accommodation> expected1 = new ArrayList<>();
+        ArrayList<Accommodation> expected2 = new ArrayList<>();
+        ArrayList<Accommodation> expected3 = new ArrayList<>();
     }
 
     @Test
     public void testFindByNameAndLocation() {
+        ArrayList<Accommodation> byName = sc.findByName("Hotel");
+        ArrayList<Accommodation> byLocation = sc.findByLocation("Reykjavik");
+        // sniðmengi.
+        byName.retainAll(byLocation);
 
+        assertEquals(byName.get(0), acc4);
     }
 
 
