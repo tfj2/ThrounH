@@ -36,15 +36,23 @@ public class Controller implements Initializable {
 
         String locationQuery = locationTextField.getCharacters().toString();
         String nameQuery = hotelTextField.getCharacters().toString();
-        System.out.println(nameQuery);
+        System.out.print(nameQuery);
         System.out.println(locationQuery);
 
-        ArrayList<Accommodation> locationResult = searchController.findByLocation(locationQuery);
         ArrayList<Accommodation> nameResult = searchController.findByName(nameQuery);
-
-        // birta svo sniðmengi af öllum dúddum I guess retainAll er very cool
-        locationResult.retainAll(nameResult);
-        hotelList.setItems(FXCollections.observableList(locationResult));
+        ArrayList<Accommodation> locationResult = searchController.findByLocation(locationQuery);
+        ArrayList<Accommodation> theResult = new ArrayList<>();
+        // birta svo sniðmengi af öllum dúddum sem ekki empty I guess retainAll er very coolif (!locationResult.isEmpty() && !nameResult.isEmpty())
+        if(!nameResult.isEmpty() && !locationResult.isEmpty()) {
+            nameResult.retainAll(locationResult);
+            theResult = nameResult;
+        }
+        else if (nameResult.isEmpty() && !locationResult.isEmpty()){
+            theResult = locationResult;
+        } else if (!nameResult.isEmpty() && locationResult.isEmpty()){
+            theResult = nameResult;
+        }
+        hotelList.setItems(FXCollections.observableList(theResult));
     }
 
     @Override
