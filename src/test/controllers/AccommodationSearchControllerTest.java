@@ -96,6 +96,8 @@ public class AccommodationSearchControllerTest {
     @Test
     public void testFindByRatingNegative() {
         ArrayList<Accommodation> result1 = sc.findByRating(-1);
+        // db mun breyta neikvæðum tölum í 0 áður en leit hefst, og mundi þá skila öllum
+        assertEquals(result1, mockData);
     }
 
     @Test
@@ -107,10 +109,6 @@ public class AccommodationSearchControllerTest {
 
         assertEquals(byName.get(0), acc4);
     }
-
-
-
-
 
     //10 til 13 test cases fyrir um það bil 3 föll
 }
