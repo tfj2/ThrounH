@@ -4,10 +4,10 @@ import entities.Accommodation;
 
 import java.util.ArrayList;
 
-public class DatabaseMockNonEmptyQuery implements Database {
+public class DatabaseMock implements Database {
     ArrayList<Accommodation> accommodations;
 
-    public DatabaseMockNonEmptyQuery(ArrayList<Accommodation> mockData) {
+    public DatabaseMock(ArrayList<Accommodation> mockData) {
         this.accommodations = mockData;
     }
 

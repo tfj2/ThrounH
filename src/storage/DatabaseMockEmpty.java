@@ -4,11 +4,11 @@ import entities.Accommodation;
 
 import java.util.ArrayList;
 
-public class DatabaseMockEmptyQuery implements Database {
+public class DatabaseMockEmpty implements Database {
 
     ArrayList<Accommodation> accommodations;
 
-    public DatabaseMockEmptyQuery(ArrayList<Accommodation> mockData) {
+    public DatabaseMockEmpty(ArrayList<Accommodation> mockData) {
         this.accommodations = mockData;
     }
 
