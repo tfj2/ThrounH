@@ -7,18 +7,19 @@ import entities.RoomType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import storage.DatabaseMockEmptyQuery;
-import storage.DatabaseMockNonEmptyQuery;
+import storage.DatabaseMock;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 
 public class AccommodationSearchControllerTest {
     AccommodationSearchController sc;
-    AccommodationSearchController sce;
+
     ArrayList<Accommodation> mockData = new ArrayList<>();
+    ArrayList<Accommodation> empty = new ArrayList<>();
     Accommodation acc1;
     Accommodation acc2;
     Accommodation acc3;
@@ -43,8 +44,7 @@ public class AccommodationSearchControllerTest {
         mockData.add(acc3);
         mockData.add(acc4);
 
-        sc = new AccommodationSearchController(new DatabaseMockNonEmptyQuery(mockData));
-        sce = new AccommodationSearchController(new DatabaseMockEmptyQuery(mockData));
+        sc = new AccommodationSearchController(new DatabaseMock(mockData));
     }
 
     @After
@@ -54,12 +54,12 @@ public class AccommodationSearchControllerTest {
 
     @Test
     public void testFindByLocationEmptySearch() {
-        assertNull(sce.findByLocation(""));
+        assertEquals(empty, sc.findByLocation(""));
     }
 
     @Test
     public void testFindByLocationSubSearch() {
-        assertEquals(sce.findByLocation("rey"), sce.findByLocation("reykjavik"));
+        assertEquals(sc.findByLocation("reykj"), sc.findByLocation("reykjavik"));
     }
 
     @Test
@@ -70,12 +70,12 @@ public class AccommodationSearchControllerTest {
 
     @Test
     public void testFindByNameEmptySearch() {
-        assertNull(sce.findByName(""));
+        assertEquals(empty, sc.findByName(""));
     }
 
     @Test
     public void testFindByNameSubSearch() {
-        assertEquals(sce.findByName("hot"), sce.findByName("hotel"));
+        assertEquals(sc.findByName("hot"), sc.findByName("hotel"));
     }
 
     @Test
@@ -85,21 +85,24 @@ public class AccommodationSearchControllerTest {
 
     @Test
     public void testFindByRating() {
-        ArrayList<Accommodation> result1 = sc.findByRating(-1);
-        ArrayList<Accommodation> result2 = sc.findByRating(0);
-        ArrayList<Accommodation> result3 = sc.findByRating(1);
+        ArrayList<Accommodation> result1 = sc.findByRating(0);
+        ArrayList<Accommodation> result2 = sc.findByRating(1);
 
+        // g.r.f. að allir hafa 0 í rating
         ArrayList<Accommodation> expected1 = mockData;
-        ArrayList<Accommodation> expected2 = mockData;
-        ArrayList<Accommodation> expected3 = new ArrayList<>();
+        ArrayList<Accommodation> expected2 = new ArrayList<>();
 
         assertEquals(result1, expected1);
         assertEquals(result2, expected2);
-        assertEquals(result3, expected3);
     }
 
     @Test
-    public void testFindByNameAndLocation() {
+    public void testFindByRatingNegative() {
+        ArrayList<Accommodation> result1 = sc.findByRating(-1);
+    }
+
+    @Test
+    public void testFindByMultiple() {
         ArrayList<Accommodation> byName = sc.findByName("Hotel");
         ArrayList<Accommodation> byLocation = sc.findByLocation("Reykjavik");
         // sniðmengi.
