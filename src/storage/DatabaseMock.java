@@ -2,7 +2,6 @@ package storage;
 
 import entities.Accommodation;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 public class DatabaseMock implements Database {
@@ -56,9 +55,5 @@ public class DatabaseMock implements Database {
             }
         }
         return result;
-    }
-    public static void main(String[] args) {
-        DatabaseMock dude = new DatabaseMock(new ArrayList<>());
-        System.out.println(dude.getHotelsByLocation("").isEmpty());
     }
 }
