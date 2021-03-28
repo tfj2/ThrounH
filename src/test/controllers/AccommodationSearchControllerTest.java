@@ -37,6 +37,29 @@ public class AccommodationSearchControllerTest {
 
     }
 
+    @Test
+    public void testFindByNameEmptySearch() {
+        assertEquals(null, sce.findByName(""));
+    }
+
+    @Test
+    public void testFindByNameSubSearch() {
+
+    }
+
+    @Test
+    public void testFindByRating() {
+
+    }
+
+    @Test
+    public void testFindByNameAndLocation() {
+
+    }
+
+
+
+
 
     //10 til 13 test cases fyrir um það bil 3 föll
 }
