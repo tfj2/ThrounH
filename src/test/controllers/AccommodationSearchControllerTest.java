@@ -87,9 +87,13 @@ public class AccommodationSearchControllerTest {
         ArrayList<Accommodation> result2 = sc.findByRating(0);
         ArrayList<Accommodation> result3 = sc.findByRating(1);
 
-        ArrayList<Accommodation> expected1 = new ArrayList<>();
-        ArrayList<Accommodation> expected2 = new ArrayList<>();
+        ArrayList<Accommodation> expected1 = mockData;
+        ArrayList<Accommodation> expected2 = mockData;
         ArrayList<Accommodation> expected3 = new ArrayList<>();
+
+        assertEquals(result1, expected1);
+        assertEquals(result2, expected2);
+        assertEquals(result3, expected3);
     }
 
     @Test
