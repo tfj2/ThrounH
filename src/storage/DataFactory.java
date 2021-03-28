@@ -8,11 +8,11 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
-public class DataFactory {
+public class DataFactory implements Database {
     public DataFactory() {
     }
 
-    public ArrayList<Accommodation> getAccommodationsSmallConstructor() {
+    public ArrayList<Accommodation> getAllHotels() {
         ArrayList<Accommodation> accommodations = new ArrayList<>();
         ArrayList<Room> rooms = getRooms();
         ArrayList<String> managerIds = new ArrayList<>();
@@ -41,6 +41,22 @@ public class DataFactory {
         return accommodations;
     }
 
+    public ArrayList<Accommodation> getHotelsByLocation(String location) {
+        System.out.println("bara til að vera legal");
+        return new ArrayList<Accommodation>();
+    }
+
+    @Override
+    public ArrayList<Accommodation> getHotelsByName(String name) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Accommodation> getHotelsByRating(double minPrice) {
+        return null;
+    }
+
+
 
     public ArrayList<Room> getRooms() {
         ArrayList<Room> rooms = new ArrayList<>();
@@ -55,5 +71,4 @@ public class DataFactory {
         rooms.add(new Room("9", 14000, RoomType.King, 3));
         return rooms;
     }
-
 }

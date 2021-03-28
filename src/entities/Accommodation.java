@@ -45,6 +45,14 @@ public class Accommodation {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = id;
+    }
+
     public String getLocation() {
         return location;
     }

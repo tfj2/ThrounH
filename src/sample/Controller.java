@@ -1,7 +1,6 @@
 package sample;
 
 import controllers.AccommodationSearchController;
-import storage.DataFactory;
 import entities.Accommodation;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -9,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import storage.DatabaseMockNonEmptyQuery;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -16,9 +16,9 @@ import java.util.ResourceBundle;
 
 // View Controller sem bregst við view ot talar við controller
 public class Controller implements Initializable {
-    private DataFactory data = new DataFactory();
+    private DatabaseMockNonEmptyQuery data = new DatabaseMockNonEmptyQuery();
 
-    private AccommodationSearchController searchController = new AccommodationSearchController();
+    private AccommodationSearchController searchController = new AccommodationSearchController(data);
     @FXML
     private Button searchButton;
     @FXML
@@ -34,18 +34,21 @@ public class Controller implements Initializable {
     public void searchButtonPressed() {
 
         String locationQuery = locationTextField.getCharacters().toString();
-        // String nameQuery = hotelTextField.getCharacters().toString();
+        String nameQuery = hotelTextField.getCharacters().toString();
+        System.out.println(nameQuery);
         System.out.println(locationQuery);
-        // sniðmengi/sammengi af locationResult, nameResult after the fact?
-        ArrayList<Accommodation> locationResult = searchController.findByLocation(locationQuery);
 
+        ArrayList<Accommodation> locationResult = searchController.findByLocation(locationQuery);
+        ArrayList<Accommodation> nameResult = searchController.findByName(nameQuery);
+
+        // birta svo sniðmengi af öllum dúddum I guess retainAll er very cool
+        locationResult.retainAll(nameResult);
         hotelList.setItems(FXCollections.observableList(locationResult));
     }
 
     @Override
     public void initialize(URL LOCATION, ResourceBundle resources) {
-        accommodationsShown = data.getAccommodationsSmallConstructor();
-
+        accommodationsShown = data.getAllHotels();
         hotelList.setItems(FXCollections.observableArrayList(accommodationsShown));
     }
 }

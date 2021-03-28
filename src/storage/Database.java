@@ -5,8 +5,13 @@ import entities.Accommodation;
 import java.util.ArrayList;
 
 public interface Database {
-    ArrayList<Accommodation> getAllHotels(String query);
+    ArrayList<Accommodation> getAllHotels();
     ArrayList<Accommodation> getHotelsByLocation(String location);
+    //ArrayList<Accommodation> getHotelsByTimePeriod(String location);
+    ArrayList<Accommodation> getHotelsByRating(double minRating);
+    //ArrayList<Accommodation> getHotelsByFacilities(String facilities);
+    //ArrayList<Accommodation> getHotelsByPrice(String maxPrice);
+    ArrayList<Accommodation> getHotelsByName(String name);
 
     // Í Database interface á að vera listi af öllum methods sem á að vera hægt að leita eftir
     //      og munu verða notuð.
