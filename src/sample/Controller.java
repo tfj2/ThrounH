@@ -32,6 +32,8 @@ public class Controller implements Initializable {
     private TextField locationTextField;
     @FXML
     private ChoiceBox priceChoice;
+    @FXML
+    private ChoiceBox ratingChoice;
     public ArrayList<Accommodation> accommodationsShown = new ArrayList<>();
     @FXML
     public void searchButtonPressed() {
@@ -66,5 +68,8 @@ public class Controller implements Initializable {
         accommodationsShown = data.getAllHotels();
         hotelList.setItems(FXCollections.observableArrayList(accommodationsShown));
         priceChoice.setItems(FXCollections.observableArrayList(PriceOption));
+        priceChoice.setValue(">");
+        ratingChoice.setItems(FXCollections.observableArrayList(PriceOption));
+        ratingChoice.setValue(">");
     }
 }
