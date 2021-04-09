@@ -12,10 +12,12 @@ import storage.DataFactory;
 import storage.DatabaseMock;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 // View Controller sem bregst við view ot talar við controller
+// kemur í staðinn fyrir T teymið (?)
 public class Controller implements Initializable {
     private DatabaseMock data = new DatabaseMock(new DataFactory().getAllHotels());
 
@@ -33,11 +35,25 @@ public class Controller implements Initializable {
 
     @FXML
     public void searchButtonPressed() {
+        ArrayList<Accommodation> theResult;
 
-        String locationQuery = locationTextField.getCharacters().toString();
-        String nameQuery = hotelTextField.getCharacters().toString();
-        System.out.print(nameQuery);
-        System.out.println(locationQuery);
+        // default gildi
+        double minRating = 0.0;
+        // default gildi
+        double maxPrice = Double.POSITIVE_INFINITY;
+
+        String location = locationTextField.getCharacters().toString();
+        String name = hotelTextField.getCharacters().toString();
+
+        // þarf að útfæra og hugsa út í facilities ...
+        String facilities = "";
+        Date from = null;
+        Date to = null;
+
+        theResult = searchController.search(location, minRating, facilities, maxPrice, name, from, to);
+        hotelList.setItems(FXCollections.observableList(theResult));
+
+        /*
 
         ArrayList<Accommodation> nameResult = searchController.findByName(nameQuery);
         ArrayList<Accommodation> locationResult = searchController.findByLocation(locationQuery);
@@ -52,7 +68,8 @@ public class Controller implements Initializable {
         } else if (!nameResult.isEmpty() && locationResult.isEmpty()){
             theResult = nameResult;
         }
-        hotelList.setItems(FXCollections.observableList(theResult));
+
+     */
     }
 
     @Override

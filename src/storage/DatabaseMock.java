@@ -2,6 +2,7 @@ package storage;
 
 import entities.Accommodation;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class DatabaseMock implements Database {
@@ -49,11 +50,22 @@ public class DatabaseMock implements Database {
 
         ArrayList<Accommodation> result = new ArrayList<>();
         for (Accommodation acc : accommodations) {
-            // contains er case sensitive, gerum leitina það ekki
             if(acc.getRating() >= minRating) {
                 result.add(acc);
             }
         }
+        return result;
+    }
+
+    @Override
+    public ArrayList<Accommodation> getHotelsByTimePeriod(Date from, Date to) {
+        return accommodations;
+    }
+
+    @Override
+    public ArrayList<Accommodation> getHotelsByPrice(double maxPrice) {
+        ArrayList<Accommodation> result = accommodations;
+        // vantar ehv concept of price.. finna average price fyrst?
         return result;
     }
 }

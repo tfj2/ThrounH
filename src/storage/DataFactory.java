@@ -6,6 +6,7 @@ import entities.RoomType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class DataFactory implements Database {
@@ -52,11 +53,19 @@ public class DataFactory implements Database {
     }
 
     @Override
-    public ArrayList<Accommodation> getHotelsByRating(double minPrice) {
+    public ArrayList<Accommodation> getHotelsByRating(double minRating) {
         return null;
     }
 
+    @Override
+    public ArrayList<Accommodation> getHotelsByPrice(double maxPrice) {
+        return null;
+    }
 
+    @Override
+    public ArrayList<Accommodation> getHotelsByTimePeriod(Date from, Date to) {
+        return new ArrayList<>();
+    }
 
     public ArrayList<Room> getRooms() {
         ArrayList<Room> rooms = new ArrayList<>();
