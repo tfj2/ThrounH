@@ -4,7 +4,7 @@ import entities.Accommodation;
 
 import java.util.ArrayList;
 
-public class DatabaseMockEmpty implements Database {
+public abstract class DatabaseMockEmpty implements Database {
 
     ArrayList<Accommodation> accommodations;
 

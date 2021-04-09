@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import storage.DatabaseMock;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
@@ -123,5 +124,12 @@ public class AccommodationSearchControllerTest {
         // Ef sniðmengi er að stærð 0.
         assertNotNull(byName);
         assertEquals(byName.size(), 0);
+    }
+
+    @Test
+    public void testCombinedSearch() {
+        ArrayList<Accommodation> byName = sc.findByName("kea");
+        ArrayList<Accommodation> byCombined = sc.search("", 0.0, "", 0.0, "kea", null, null);
+        assertEquals(byName, byCombined);
     }
 }

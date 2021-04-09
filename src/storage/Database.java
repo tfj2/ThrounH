@@ -2,16 +2,16 @@ package storage;
 
 import entities.Accommodation;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public interface Database {
     ArrayList<Accommodation> getAllHotels();
     ArrayList<Accommodation> getHotelsByLocation(String location);
-    //ArrayList<Accommodation> getHotelsByTimePeriod(String location);
+    ArrayList<Accommodation> getHotelsByTimePeriod(Date from, Date to);
     ArrayList<Accommodation> getHotelsByRating(double minRating);
     //ArrayList<Accommodation> getHotelsByFacilities(String facilities);
-    //ArrayList<Accommodation> getHotelsByPrice(String maxPrice);
+    ArrayList<Accommodation> getHotelsByPrice(double maxPrice);
     ArrayList<Accommodation> getHotelsByName(String name);
-
 }
 
