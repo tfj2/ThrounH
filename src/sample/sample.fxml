@@ -22,10 +22,10 @@
          <children>
             <AnchorPane layoutX="100.0" layoutY="200.0" prefHeight="200.0" prefWidth="401.0">
                <children>
-                  <ListView fx:id="roomList" layoutY="56.0" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="roomList" layoutY="56.0" onMouseClicked="#roomViewMouseClicked" prefHeight="200.0" prefWidth="200.0" />
                   <ListView fx:id="roomPropertyList" layoutX="201.0" layoutY="56.0" prefHeight="200.0" prefWidth="200.0" />
                   <Label layoutX="60.0" layoutY="31.0" text="Room List" />
-                  <Label layoutX="257.0" layoutY="31.0" text="Room Properties" />
+                  <Label layoutX="257.0" layoutY="31.0" text="Room Price" />
                   <Button fx:id="bookButton" layoutX="350.0" layoutY="-12.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="43.0" text="Book" />
                </children>
             </AnchorPane>

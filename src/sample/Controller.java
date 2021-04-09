@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import storage.DataFactory;
 import storage.DatabaseMock;
 import javax.swing.*;
+import java.awt.*;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class Controller implements Initializable {
     private ChoiceBox ratingChoice;
     @FXML
     private ListView roomList;
+    @FXML
+    private ListView roomPropertyList;
 
     public ArrayList<Accommodation> accommodationsShown = new ArrayList<>();
     @FXML
@@ -90,6 +93,20 @@ public class Controller implements Initializable {
         }
         ObservableList<Room> theRooms = FXCollections.observableArrayList(theHotel.getRoomArrayList());
         roomList.setItems(theRoomTypes);
+    }
+
+    public void roomViewMouseClicked(MouseEvent mouseEvent){
+        Accommodation theHotel = (Accommodation) hotelList.getSelectionModel().getSelectedItem();
+        RoomType theRoom = (RoomType) roomList.getSelectionModel().getSelectedItem();
+        ObservableList<String> theRoomPrice = FXCollections.observableArrayList();
+        int place  = 0;
+        for(int count = 0; count<theHotel.getRoomArrayList().size(); count++){
+            if(theHotel.getRoomArrayList().get(count).getRoomType() == theRoom){
+                place = count;
+            }
+        }
+        theRoomPrice.add("" + theHotel.getRoomArrayList().get(place).getPrice());
+        roomPropertyList.setItems(theRoomPrice);
     }
     @Override
     public void initialize(URL LOCATION, ResourceBundle resources) {
