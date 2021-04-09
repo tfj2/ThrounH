@@ -2,14 +2,18 @@ package sample;
 
 import controllers.AccommodationSearchController;
 import entities.Accommodation;
+import entities.Room;
+import entities.RoomType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import storage.DataFactory;
 import storage.DatabaseMock;
 import javax.swing.*;
@@ -36,6 +40,9 @@ public class Controller implements Initializable {
     private ChoiceBox priceChoice;
     @FXML
     private ChoiceBox ratingChoice;
+    @FXML
+    private ListView roomList;
+
     public ArrayList<Accommodation> accommodationsShown = new ArrayList<>();
     @FXML
     public void searchButtonPressed() {
@@ -75,7 +82,15 @@ public class Controller implements Initializable {
 
      */
     }
-
+    public void hotelViewMouseClicked(MouseEvent mouseEvent){
+        Accommodation theHotel = (Accommodation) hotelList.getSelectionModel().getSelectedItem();
+        ObservableList<RoomType> theRoomTypes = FXCollections.observableArrayList();
+        for(int count = 0; count<theHotel.getRoomArrayList().size(); count++){
+            theRoomTypes.add(theHotel.getRoomArrayList().get(count).getRoomType());
+        }
+        ObservableList<Room> theRooms = FXCollections.observableArrayList(theHotel.getRoomArrayList());
+        roomList.setItems(theRoomTypes);
+    }
     @Override
     public void initialize(URL LOCATION, ResourceBundle resources) {
         ArrayList<String> PriceOption = new ArrayList<>();
