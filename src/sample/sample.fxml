@@ -37,7 +37,7 @@
             <Label layoutX="181.0" layoutY="141.0" text="Price:" />
             <Button fx:id="searchButton" layoutX="323.0" layoutY="169.0" mnemonicParsing="false" onAction="#searchButtonPressed" text="Search" />
             <Button fx:id="bookButton" layoutX="434.0" layoutY="169.0" mnemonicParsing="false" text="Book" />
-            <ChoiceBox layoutX="390.0" layoutY="137.0" prefHeight="25.0" prefWidth="88.0" />
+            <ChoiceBox fx:id="priceChoice" layoutX="390.0" layoutY="137.0" prefHeight="25.0" prefWidth="88.0" />
          </children>
       </AnchorPane>
    </right>

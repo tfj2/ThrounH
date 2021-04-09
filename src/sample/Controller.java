@@ -3,14 +3,16 @@ package sample;
 import controllers.AccommodationSearchController;
 import entities.Accommodation;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import storage.DataFactory;
 import storage.DatabaseMock;
-
+import javax.swing.*;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -30,9 +32,9 @@ public class Controller implements Initializable {
     private TextField hotelTextField;
     @FXML
     private TextField locationTextField;
-
+    @FXML
+    private ChoiceBox priceChoice;
     public ArrayList<Accommodation> accommodationsShown = new ArrayList<>();
-
     @FXML
     public void searchButtonPressed() {
         ArrayList<Accommodation> theResult;
@@ -74,7 +76,12 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL LOCATION, ResourceBundle resources) {
+        ArrayList<String> PriceOption = new ArrayList<>();
+        PriceOption.add(">");
+        PriceOption.add("<");
+        PriceOption.add("=");
         accommodationsShown = data.getAllHotels();
         hotelList.setItems(FXCollections.observableArrayList(accommodationsShown));
+        priceChoice.setItems(FXCollections.observableArrayList(PriceOption));
     }
 }
