@@ -49,18 +49,14 @@ public class DatabaseConnection /*implements Database*/ {
                 createNewDatabase(url);
             }
 
-
             conn = DriverManager.getConnection(url);
             conn.setAutoCommit(false);
 
             String hailmary = (dbDir + "schema.sql").replace(File.separator, "/");
-
             // getContextClassLoader vill dukka upp i out...
             //scriptStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema.sql");
             //System.out.println(DatabaseConnection.class.getResource("/").getPath());
-
             // File reader to read from disc
-
             //BufferedReader scriptReader = new BufferedReader(new InputStreamReader(scriptStream));
 
             BufferedReader scriptReader = new BufferedReader(new FileReader(hailmary));
@@ -89,7 +85,6 @@ public class DatabaseConnection /*implements Database*/ {
     }
 
     public static void main(String[] args) throws Exception {
-
         initializeDatabase();
     }
 
