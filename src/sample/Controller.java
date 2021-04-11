@@ -7,11 +7,11 @@ import entities.RoomType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import storage.DataFactory;
@@ -23,9 +23,14 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+
 // View Controller sem bregst við view ot talar við controller
 // kemur í staðinn fyrir T teymið (?)
 public class Controller implements Initializable {
+    public String FromTo;
+    public String From;
+    public String To;
+
     private DatabaseMock data = new DatabaseMock(new DataFactory().getAllHotels());
 
     private AccommodationSearchController searchController = new AccommodationSearchController(data);
@@ -41,6 +46,12 @@ public class Controller implements Initializable {
     private ListView roomList;
     @FXML
     private ListView roomPropertyList;
+    @FXML
+    private DatePicker FromDate;
+    @FXML
+    private DatePicker ToDate;
+    @FXML
+    private ListView RoomStatusView;
 
     public ArrayList<Accommodation> accommodationsShown = new ArrayList<>();
     @FXML
@@ -103,6 +114,27 @@ public class Controller implements Initializable {
         }
         theRoomPrice.add("" + theHotel.getRoomArrayList().get(place).getPrice());
         roomPropertyList.setItems(theRoomPrice);
+    }
+    public void FromMouseAction(ActionEvent actionEvent) {
+        java.sql.Date theFromDate = java.sql.Date.valueOf(FromDate.getValue());
+        From = "" + theFromDate;
+        if(To == null){
+        }
+        else{
+            FromTo = theFromDate + "_" + To ;
+            System.out.print(FromTo);
+        }
+    }
+
+    public void ToMouseAction(ActionEvent actionEvent) {
+        java.sql.Date theToDate = java.sql.Date.valueOf(ToDate.getValue());
+        To = "" + theToDate;
+        if(From == null){
+        }
+        else{
+            FromTo = From + "_" + theToDate;
+            System.out.print(FromTo);
+        }
     }
     @Override
     public void initialize(URL LOCATION, ResourceBundle resources) {
