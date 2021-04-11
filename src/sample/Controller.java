@@ -107,7 +107,7 @@ public class Controller implements Initializable {
         theRoomPrice.add("" + theHotel.getAllRooms().get(place).getPrice());
         roomPropertyList.setItems(theRoomPrice);
     }
-    public void FromMouseAction(ActionEvent actionEvent) {
+    public void fromMouseAction(ActionEvent actionEvent) {
         java.sql.Date theFromDate = java.sql.Date.valueOf(FromDate.getValue());
         from = "" + theFromDate;
         if(to == null){

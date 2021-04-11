@@ -44,7 +44,7 @@
             <Label layoutX="384.0" layoutY="-2.0" text="Book" />
             <Label layoutX="368.0" layoutY="40.0" text="Date From:" />
             <Label layoutX="375.0" layoutY="114.0" text="Date To:" />
-            <DatePicker fx:id="FromDate" layoutX="324.0" layoutY="63.0" onAction="#FromMouseAction" />
+            <DatePicker fx:id="FromDate" layoutX="324.0" layoutY="63.0" onAction="#fromMouseAction" />
             <DatePicker fx:id="ToDate" layoutX="324.0" layoutY="143.0" onAction="#toMouseAction" />
          </children>
       </AnchorPane>

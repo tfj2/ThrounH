@@ -28,10 +28,6 @@ public class AccommodationSearchController {
         return data.getHotelsByRating(minRating);
     }
 
-    // kannski beila bara á find by facilities...
-    // public ArrayList<Accommodation> findByFacilities(String facilities) {
-    //    return new ArrayList<>();
-    // }
 
     public ArrayList<Accommodation> findByPrice(double maxPrice) {
         return data.getHotelsByPrice(maxPrice);
