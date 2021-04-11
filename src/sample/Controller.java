@@ -2,6 +2,7 @@ package sample;
 
 import controllers.AccommodationSearchController;
 import entities.Accommodation;
+import entities.Booking;
 import entities.Room;
 import entities.RoomType;
 import javafx.collections.FXCollections;
@@ -136,6 +137,23 @@ public class Controller implements Initializable {
             System.out.print(FromTo);
         }
     }
+
+    public void BookingClick(MouseEvent mouseEvent){
+        Accommodation theHotel = (Accommodation) hotelList.getSelectionModel().getSelectedItem();
+        RoomType theRoom = (RoomType) roomList.getSelectionModel().getSelectedItem();
+        java.sql.Date theFromDate = null;
+        java.sql.Date theToDate = null;
+        if(FromTo != null){
+            theFromDate = java.sql.Date.valueOf(FromDate.getValue());
+            theToDate = java.sql.Date.valueOf(ToDate.getValue());
+        }
+        Booking b = new Booking();
+        System.out.print(theHotel);
+        System.out.print(theRoom);
+        System.out.print(theFromDate);
+        System.out.print(theToDate);
+    }
+
     @Override
     public void initialize(URL LOCATION, ResourceBundle resources) {
 
