@@ -65,7 +65,7 @@ public class Controller implements Initializable {
         Date from = null;
         Date to = null;
 
-        theResult = searchController.search(location, minRating, maxPrice, name, from, to);
+        theResult = searchController.search(location, minRating, maxPrice, name);
         hotelList.setItems(FXCollections.observableList(theResult));
 
     }

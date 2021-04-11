@@ -1,5 +1,10 @@
 package entities;
 
+import controllers.AccommodationSearchController;
+import storage.DataFactory;
+import storage.DatabaseMock;
+
+import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -73,9 +78,12 @@ public class Accommodation {
     public ArrayList<Room> getAllRooms() {
         return roomArrayList;
     }
-    public ArrayList<Room> getAvailableRooms(Date from, Date to) {
 
-        return new ArrayList<>();
+    public ArrayList<Room> getAvailableRooms(Date from, Date to) {
+        ArrayList<Room> availableRooms = new ArrayList<>();
+
+
+        return availableRooms;
     }
 
     public void setRoomArrayList(ArrayList<Room> roomArrayList) {
@@ -108,5 +116,20 @@ public class Accommodation {
 
     public String toString() {
         return this.name;
+    }
+
+    public static void main(String[] args) {
+        DatabaseMock data = new DatabaseMock(new DataFactory().getAllHotels());
+        AccommodationSearchController searchController = new AccommodationSearchController(data);
+
+        Accommodation testPig = data.getAllHotels().get(2);
+        ArrayList<Room> roomsOfHotel = testPig.getAllRooms();
+        Room roomPig = roomsOfHotel.get(3);
+
+        Date testfrom = new Date(2020, 11, 1);
+        Date testto = new Date(2020, 11, 1);
+        System.out.println(roomPig);
+        System.out.println(roomsOfHotel);
+        System.out.println(testPig);
     }
 }
