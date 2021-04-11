@@ -1,7 +1,7 @@
 .idea/
 idea/
 out/
-*.imi
+*.iml
 out
 production
 ThrounH.iml

@@ -49,18 +49,14 @@ public class DatabaseConnection /*implements Database*/ {
                 createNewDatabase(url);
             }
 
-
             conn = DriverManager.getConnection(url);
             conn.setAutoCommit(false);
 
             String hailmary = (dbDir + "schema.sql").replace(File.separator, "/");
-
             // getContextClassLoader vill dukka upp i out...
             //scriptStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema.sql");
             //System.out.println(DatabaseConnection.class.getResource("/").getPath());
-
             // File reader to read from disc
-
             //BufferedReader scriptReader = new BufferedReader(new InputStreamReader(scriptStream));
 
             BufferedReader scriptReader = new BufferedReader(new FileReader(hailmary));
@@ -88,8 +84,54 @@ public class DatabaseConnection /*implements Database*/ {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void populateDatabase() throws Exception {
+        InputStream scriptStream = null;
+        Connection conn = null;
+        try {
+            String currDir = System.getProperty("user.dir");
+            // til að þetta sé óhátt stýrikerfi
+            String fileName = "dev.db"; // viljum kannski breyta seinna
+            String dbDir = currDir + File.separator + "src" + File.separator + "storage" + File.separator;
+            String dbDir2 = dbDir.replace(File.separator, "/");
+            String dbName = dbDir2 + fileName;
 
+            String url = "jdbc:sqlite:" + dbName;
+
+            File dbFile = new File(dbName);
+            if (!dbFile.exists()) {
+                return;
+            }
+            conn = DriverManager.getConnection(url);
+            conn.setAutoCommit(false);
+
+            String hailmary = (dbDir + "values.sql").replace(File.separator, "/");
+
+            BufferedReader scriptReader = new BufferedReader(new FileReader(hailmary));
+
+            String nextLine;
+            StringBuffer nextStatement = new StringBuffer();
+            Statement stmt = conn.createStatement();
+            while ((nextLine = scriptReader.readLine()) != null) {
+                if (nextLine.startsWith("REM") ||
+                        nextLine.startsWith("COMMIT") ||
+                        nextLine.length() < 1)
+                    continue;
+                nextStatement.append(nextLine + "\n");
+                if (nextLine.endsWith(";")) {
+                    System.out.println(nextStatement.toString());
+                    stmt.execute(nextStatement.toString());
+                    nextStatement = new StringBuffer();
+                }
+            }
+            conn.commit();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
         initializeDatabase();
     }
 
