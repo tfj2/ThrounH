@@ -147,11 +147,18 @@ public class Controller implements Initializable {
             theFromDate = java.sql.Date.valueOf(FromDate.getValue());
             theToDate = java.sql.Date.valueOf(ToDate.getValue());
         }
-        Booking b = new Booking();
-        System.out.print(theHotel);
-        System.out.print(theRoom);
-        System.out.print(theFromDate);
-        System.out.print(theToDate);
+        int place  = 0;
+        for(int count = 0; count<theHotel.getRoomArrayList().size(); count++){
+            if(theHotel.getRoomArrayList().get(count).getRoomType() == theRoom){
+                place = count;
+            }
+        }
+        Room theRoomR = theHotel.getRoomArrayList().get(place);
+        if(theHotel != null && theRoomR != null && theFromDate != null && theToDate != null){
+            Booking b = new Booking(theHotel, theRoomR, theFromDate, theToDate);
+            System.out.println(b.getBookingDateTo());
+            System.out.print(b);
+        }
     }
 
     @Override
