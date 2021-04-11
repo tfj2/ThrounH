@@ -52,6 +52,10 @@ public class Room {
         occupancies.add(occupancy);
     }
 
+    public ArrayList<Occupancy> getOccupancies() {
+        return occupancies;
+    }
+
     public String toString() {
         return roomType.toString();
     }

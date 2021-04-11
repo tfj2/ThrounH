@@ -71,15 +71,9 @@ public class Controller implements Initializable {
     }
     public void hotelViewMouseClicked(MouseEvent mouseEvent){
         Accommodation theHotel = (Accommodation) hotelList.getSelectionModel().getSelectedItem();
-        ObservableList<RoomType> theRoomTypes = FXCollections.observableArrayList();
-
+        System.out.println(theHotel);
         java.sql.Date from = null;
         java.sql.Date to = null;
-
-        if(fromTo != null){
-            from = java.sql.Date.valueOf(FromDate.getValue());
-            to = java.sql.Date.valueOf(ToDate.getValue());
-        }
 
         ArrayList<Room> roomsToShow = null;
 
@@ -91,11 +85,11 @@ public class Controller implements Initializable {
             // engin dagsetning valin, sýnum öll herbergi
             roomsToShow = theHotel.getAllRooms();
         }
-
+        System.out.println(roomsToShow);
         //for(int count = 0; count<roomsToShow.size(); count++){
         //    theRoomTypes.add(roomsToShow.get(count).getRoomType());
         //}
-        ObservableList<Room> theRooms = FXCollections.observableArrayList(theHotel.getAllRooms());
+        // ObservableList<Room> theRooms = FXCollections.observableArrayList(theHotel.getAllRooms());
         roomList.setItems(FXCollections.observableArrayList(roomsToShow));
     }
 
@@ -124,7 +118,7 @@ public class Controller implements Initializable {
         }
     }
 
-    public void ToMouseAction(ActionEvent actionEvent) {
+    public void toMouseAction(ActionEvent actionEvent) {
         java.sql.Date theToDate = java.sql.Date.valueOf(ToDate.getValue());
         to = "" + theToDate;
         if(from == null){
@@ -135,10 +129,10 @@ public class Controller implements Initializable {
         }
     }
 
-    public void BookingClick(MouseEvent mouseEvent){
+    public void bookingClick(MouseEvent mouseEvent){
         Accommodation theHotel = (Accommodation) hotelList.getSelectionModel().getSelectedItem();
-        RoomType theRoom = (RoomType) roomList.getSelectionModel().getSelectedItem();
-        Room theRoomR = null;
+        Room theRoom = (Room) roomList.getSelectionModel().getSelectedItem();
+
         java.sql.Date theFromDate = null;
         java.sql.Date theToDate = null;
         if(fromTo != null){
@@ -146,6 +140,7 @@ public class Controller implements Initializable {
             theToDate = java.sql.Date.valueOf(ToDate.getValue());
         }
         int place  = 0;
+        /* þarf ekki fyrst Room er núna í lista en ekki RoomType
         if(theHotel != null){
             for(int count = 0; count<theHotel.getAllRooms().size(); count++){
                 if(theHotel.getAllRooms().get(count).getRoomType() == theRoom){
@@ -153,15 +148,17 @@ public class Controller implements Initializable {
                 }
             }
             theRoomR = theHotel.getAllRooms().get(place);
-        }
-        if(theHotel != null && theRoomR != null && theFromDate != null && theToDate != null){
+        }*/
+        if(theHotel != null && theRoom != null && theFromDate != null && theToDate != null){
 
             Occupancy occupancy = new Occupancy(theFromDate, theToDate);
-            theRoomR.addOccupancy(occupancy);
+            theRoom.addOccupancy(occupancy);
 
-            Booking b = new Booking(theHotel, theRoomR, theFromDate, theToDate);
+            Booking b = new Booking(theHotel, theRoom, theFromDate, theToDate);
             System.out.println(b.getBookingDateTo());
             System.out.print(b);
+            System.out.println("Room booked");
+            roomList.setItems(FXCollections.observableArrayList(theHotel.getAvailableRooms(theFromDate, theToDate)));
         }
     }
 

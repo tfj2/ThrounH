@@ -27,7 +27,7 @@
                   <Label layoutX="59.0" layoutY="14.0" text="Room List" />
                   <Label layoutX="256.0" layoutY="14.0" text="Room Price" />
                   <Button fx:id="searchButton" layoutX="59.0" layoutY="-15.0" mnemonicParsing="false" onAction="#searchButtonPressed" prefHeight="21.0" prefWidth="52.0" text="Search" />
-                  <Button fx:id="bookButton" layoutX="344.0" layoutY="-12.0" mnemonicParsing="false" onMouseClicked="#BookingClick" prefHeight="20.0" prefWidth="43.0" text="Book" />
+                  <Button fx:id="bookButton" layoutX="344.0" layoutY="-12.0" mnemonicParsing="false" onMouseClicked="#bookingClick" prefHeight="20.0" prefWidth="43.0" text="Book" />
                   <ListView fx:id="RoomStatusList" layoutX="201.0" layoutY="112.0" prefHeight="142.0" prefWidth="200.0" />
                   <Label layoutX="235.0" layoutY="89.0" text="Room unavailability" />
                </children>
@@ -45,7 +45,7 @@
             <Label layoutX="368.0" layoutY="40.0" text="Date From:" />
             <Label layoutX="375.0" layoutY="114.0" text="Date To:" />
             <DatePicker fx:id="FromDate" layoutX="324.0" layoutY="63.0" onAction="#FromMouseAction" />
-            <DatePicker fx:id="ToDate" layoutX="324.0" layoutY="143.0" onAction="#ToMouseAction" />
+            <DatePicker fx:id="ToDate" layoutX="324.0" layoutY="143.0" onAction="#toMouseAction" />
          </children>
       </AnchorPane>
    </right>

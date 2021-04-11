@@ -82,9 +82,47 @@ public class Accommodation {
     public ArrayList<Room> getAvailableRooms(Date from, Date to) {
         ArrayList<Room> availableRooms = new ArrayList<>();
 
+        for(Room room : roomArrayList) {
+            if(!isOccupied(room.getOccupancies(), from, to)) {
+                availableRooms.add(room);
+            }
+        }
 
         return availableRooms;
     }
+
+    /**
+     *
+     * @param occupancies listi af occupancies herbergis
+     * @param from byrjun á tíma til skoðunar
+     * @param to   lok tíma til skoðunar
+     * @return true ef herbergi er upptekið á þessum tíma, false annars
+     */
+    private boolean isOccupied(ArrayList<Occupancy> occupancies, Date from, Date to) {
+        boolean occupied = false;
+        for(Occupancy occupancy : occupancies) {
+            Date occFrom = occupancy.getDateFrom();
+            Date occTo = occupancy.getDateTo();
+            // occupied ef occFrom eða occTo er á milli from og to.
+            // einnig occupied ef tímabil occupancy nær yfir from og to
+            if (occFrom.compareTo(from)>=0 && occFrom.compareTo(to)<=0) {
+                // occFrom er á milli from og to
+                occupied = true;
+            }
+            if (occTo.compareTo(from)>=0 && occTo.compareTo(to)<=0) {
+                // occTo er á milli from og to
+                occupied = true;
+            }
+
+            if (occFrom.compareTo(from)<0 && occTo.compareTo(to)>0) {
+                // from to er innihaldid í occupancy
+                occupied = true;
+            }
+        }
+
+        return occupied;
+    }
+
 
     public void setRoomArrayList(ArrayList<Room> roomArrayList) {
         this.roomArrayList = roomArrayList;
@@ -122,14 +160,29 @@ public class Accommodation {
         DatabaseMock data = new DatabaseMock(new DataFactory().getAllHotels());
         AccommodationSearchController searchController = new AccommodationSearchController(data);
 
-        Accommodation testPig = data.getAllHotels().get(2);
-        ArrayList<Room> roomsOfHotel = testPig.getAllRooms();
+        Accommodation hotelPig = data.getAllHotels().get(2);
+        ArrayList<Room> roomsOfHotel = hotelPig.getAllRooms();
         Room roomPig = roomsOfHotel.get(3);
 
-        Date testfrom = new Date(2020, 11, 1);
-        Date testto = new Date(2020, 11, 1);
+        long now = System.currentTimeMillis();
+        Date sqlDateFrom = new Date(now);
+        Date sqlDateTo = new Date(now + (1000 * 60 * 60 * 24 * 7));
+        System.out.println(sqlDateFrom);
+        System.out.println(sqlDateTo);
+
+
         System.out.println(roomPig);
         System.out.println(roomsOfHotel);
-        System.out.println(testPig);
+        System.out.println(hotelPig);
+
+        Date bookFrom = new Date(now+(1000 * 60 * 60 * 24 * 8));
+        Date bookTo = new Date(now+(1000 * 60 * 60 * 24 * 10));
+
+        roomPig.addOccupancy(new Occupancy(bookFrom, bookTo));
+        ArrayList<Room> availableRooms = hotelPig.getAvailableRooms(sqlDateFrom, sqlDateTo);
+
+        System.out.println(availableRooms);
+
+        System.out.println(hotelPig.isOccupied(roomPig.getOccupancies(), sqlDateFrom, sqlDateTo));
     }
 }
