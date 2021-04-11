@@ -1,13 +1,49 @@
 package storage;
 
+import entities.Accommodation;
+import entities.Room;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.sql.*;
+import java.time.format.DateTimeFormatter;
 
 public class DatabaseConnection /*implements Database*/ {
+
+    private Connection conn = null;
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    public DatabaseConnection() {
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:hotel.db");
+            initializeDatabase();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            closeConnection();
+        }
+    }
+
+    private void closeConnection() {
+        try {
+            if (conn != null)
+                conn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    private void getConnection() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection("jdbc:sqlite:hotel.db");
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
     private static void createNewDatabase(String url) {
         try (Connection conn = DriverManager.getConnection(url)) {
@@ -23,19 +59,17 @@ public class DatabaseConnection /*implements Database*/ {
     }
 
     //https://docs.oracle.com/cd/E35521_01/doc.111230/e24475/amxdatabase.htm#ADFMF1263
-    private static void initializeDatabase() throws Exception {
+    private void initializeDatabase() throws Exception {
         InputStream scriptStream = null;
         Connection conn = null;
         //Class.forName("org.sqlite.JDBC");
         try {
             String currDir = System.getProperty("user.dir");
             // til að þetta sé óhátt stýrikerfi
-            String fileName = "dev.db"; // viljum kannski breyta seinna
+            String fileName = "hotel.db"; // viljum kannski breyta seinna
             String dbDir = currDir + File.separator + "src" + File.separator + "storage" + File.separator;
             String dbDir2 = dbDir.replace(File.separator, "/");
             String dbName = dbDir2 + fileName;
-            System.out.println(currDir);
-            System.out.println(dbName);
 
             String url = "jdbc:sqlite:" + dbName;
 
@@ -53,11 +87,6 @@ public class DatabaseConnection /*implements Database*/ {
             conn.setAutoCommit(false);
 
             String hailmary = (dbDir + "schema.sql").replace(File.separator, "/");
-            // getContextClassLoader vill dukka upp i out...
-            //scriptStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("schema.sql");
-            //System.out.println(DatabaseConnection.class.getResource("/").getPath());
-            // File reader to read from disc
-            //BufferedReader scriptReader = new BufferedReader(new InputStreamReader(scriptStream));
 
             BufferedReader scriptReader = new BufferedReader(new FileReader(hailmary));
 
@@ -84,55 +113,46 @@ public class DatabaseConnection /*implements Database*/ {
         }
     }
 
-    public static void populateDatabase() throws Exception {
-        InputStream scriptStream = null;
-        Connection conn = null;
-        try {
-            String currDir = System.getProperty("user.dir");
-            // til að þetta sé óhátt stýrikerfi
-            String fileName = "dev.db"; // viljum kannski breyta seinna
-            String dbDir = currDir + File.separator + "src" + File.separator + "storage" + File.separator;
-            String dbDir2 = dbDir.replace(File.separator, "/");
-            String dbName = dbDir2 + fileName;
-
-            String url = "jdbc:sqlite:" + dbName;
-
-            File dbFile = new File(dbName);
-            if (!dbFile.exists()) {
-                return;
-            }
-            conn = DriverManager.getConnection(url);
-            conn.setAutoCommit(false);
-
-            String hailmary = (dbDir + "values.sql").replace(File.separator, "/");
-
-            BufferedReader scriptReader = new BufferedReader(new FileReader(hailmary));
-
-            String nextLine;
-            StringBuffer nextStatement = new StringBuffer();
-            Statement stmt = conn.createStatement();
-            while ((nextLine = scriptReader.readLine()) != null) {
-                if (nextLine.startsWith("REM") ||
-                        nextLine.startsWith("COMMIT") ||
-                        nextLine.length() < 1)
-                    continue;
-                nextStatement.append(nextLine + "\n");
-                if (nextLine.endsWith(";")) {
-                    System.out.println(nextStatement.toString());
-                    stmt.execute(nextStatement.toString());
-                    nextStatement = new StringBuffer();
-                }
-            }
-            conn.commit();
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
-        }
+    public void createAcc(Accommodation acc) throws Exception {
+        getConnection();
+        String q = "INSERT INTO Accommodation "
+                + "(name, location, rating, description)"
+                + "VALUES (?,?,?,?)";
+        PreparedStatement ps = conn.prepareStatement(q);
+        ps.setString(1, acc.getName());
+        ps.setString(2, acc.getLocation());
+        ps.setDouble(3, acc.getRating());
+        ps.setString(4, acc.getDescription());
+        ps.executeUpdate();
+        ps.close();
+        closeConnection();
     }
+
+ /*   public ArrayList<Accommodation> getAllAcc() throws Exception {
+        getConnection();
+        Statement stmt = conn.createStatement();
+        //ResultSet rs = stmt.executeQuery();
+        closeConnection();
+    }
+*/
+    public void createRoom(Room room) throws Exception {
+        getConnection();
+        String q = "INSERT INTO Room "
+                + "(roomType, price, cap)"
+                + "VALUES (?,?,?)";
+        PreparedStatement pstmt = conn.prepareStatement(q);
+        pstmt.setString(1, room.getRoomType().name()); // þvi þetta er enum
+        pstmt.setDouble(2, room.getPrice());
+        pstmt.setInt(3, room.getCap());
+        pstmt.executeUpdate();
+        pstmt.close();
+        closeConnection();
+    }
+
 
     public static void main(String[] args) throws Exception {
-        initializeDatabase();
+        DatabaseConnection test = new DatabaseConnection();
+
     }
 
 }

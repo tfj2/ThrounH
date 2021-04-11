@@ -31,7 +31,7 @@ public class Occupancy {
     }
 
     public static void main(String[] args) {
-        
+
     }
 
 }
