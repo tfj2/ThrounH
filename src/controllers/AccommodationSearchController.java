@@ -29,9 +29,9 @@ public class AccommodationSearchController {
     }
 
     // kannski beila bara á find by facilities...
-    public ArrayList<Accommodation> findByFacilities(String facilities) {
-        return new ArrayList<>();
-    }
+    // public ArrayList<Accommodation> findByFacilities(String facilities) {
+    //    return new ArrayList<>();
+    // }
 
     public ArrayList<Accommodation> findByPrice(double maxPrice) {
         return data.getHotelsByPrice(maxPrice);
@@ -67,7 +67,7 @@ public class AccommodationSearchController {
 
         ArrayList<Accommodation> nameResult = findByName(name);
         ArrayList<Accommodation> locationResult = findByLocation(location);
-        ArrayList<Accommodation> facilitiesResult = findByFacilities(facilities);
+        // ArrayList<Accommodation> facilitiesResult = findByFacilities(facilities);
         ArrayList<Accommodation> ratingResult = findByRating(minRating);
         ArrayList<Accommodation> priceResult = findByPrice(maxPrice);
         ArrayList<Accommodation> periodResult = findByTimePeriod(from, to);
@@ -84,10 +84,6 @@ public class AccommodationSearchController {
         if(!isNull(from) && !isNull(to)) {
             System.out.println("date");
             theResult.retainAll(periodResult);
-        }
-        if(!facilities.equals("")) {
-            System.out.println("facilities");
-            theResult.retainAll(facilitiesResult);
         }
         if(!name.equals("")) {
             System.out.println("name");
