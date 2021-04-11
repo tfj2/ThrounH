@@ -1,79 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView fx:id="hotelList" onMouseClicked="#hotelViewMouseClicked" prefHeight="576.0" prefWidth="200.0" />
+            <ListView fx:id="hotelList" onMouseClicked="#hotelViewMouseClicked" prefHeight="455.0" prefWidth="200.0" />
             <Label layoutX="75.0" layoutY="26.0" text="Hotel List" />
          </children>
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="576.0" prefWidth="498.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="426.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="-166.0" layoutY="202.0" prefHeight="200.0" prefWidth="401.0">
+            <AnchorPane layoutX="100.0" layoutY="200.0" prefHeight="200.0" prefWidth="401.0">
                <children>
-                  <ListView fx:id="roomList" layoutY="42.0" onMouseClicked="#roomViewMouseClicked" prefHeight="330.0" prefWidth="200.0" />
-                  <ListView fx:id="roomPropertyList" layoutX="201.0" layoutY="42.0" prefHeight="45.0" prefWidth="200.0" />
+                  <ListView fx:id="roomList" layoutY="42.0" onMouseClicked="#roomViewMouseClicked" prefHeight="212.0" prefWidth="200.0" />
+                  <ListView fx:id="roomPropertyList" layoutX="201.0" layoutY="42.0" prefHeight="38.0" prefWidth="200.0" />
                   <Label layoutX="59.0" layoutY="14.0" text="Room List" />
                   <Label layoutX="256.0" layoutY="14.0" text="Room Price" />
                   <Button fx:id="searchButton" layoutX="59.0" layoutY="-15.0" mnemonicParsing="false" onAction="#searchButtonPressed" prefHeight="21.0" prefWidth="52.0" text="Search" />
                   <Button fx:id="bookButton" layoutX="344.0" layoutY="-12.0" mnemonicParsing="false" onMouseClicked="#BookingClick" prefHeight="20.0" prefWidth="43.0" text="Book" />
-                  <ListView fx:id="RoomStatusList" layoutX="201.0" layoutY="112.0" prefHeight="258.0" prefWidth="200.0" />
+                  <ListView fx:id="RoomStatusList" layoutX="201.0" layoutY="112.0" prefHeight="142.0" prefWidth="200.0" />
                   <Label layoutX="235.0" layoutY="89.0" text="Room unavailability" />
                </children>
             </AnchorPane>
-            <Label layoutX="-164.0" layoutY="24.0" text="Hotel:" />
-            <Label layoutX="-164.0" layoutY="69.0" text="Location:" />
-            <Label layoutX="-45.0" text="Search" />
-            <TextField fx:id="hotelTextField" layoutX="-101.0" layoutY="20.0" />
-            <TextField fx:id="locationTextField" layoutX="-102.0" layoutY="65.0" />
-            <TextField fx:id="priceTextField" layoutX="-101.0" layoutY="107.0" />
-            <Label layoutX="-164.0" layoutY="111.0" text="Price:" />
-            <Label layoutX="-166.0" layoutY="149.0" text="Rating:" />
-            <TextField layoutX="-102.0" layoutY="145.0" />
-            <Label layoutX="118.0" text="Book" />
-            <Label layoutX="102.0" layoutY="42.0" text="Date From:" />
-            <Label layoutX="109.0" layoutY="116.0" text="Date To:" />
-            <DatePicker fx:id="FromDate" layoutX="58.0" layoutY="65.0" onAction="#FromMouseAction" />
-            <DatePicker fx:id="ToDate" layoutX="58.0" layoutY="145.0" onAction="#ToMouseAction" />
-            <TabPane layoutX="-366.0" layoutY="256.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" />
-            <Label layoutX="345.0" text="Add new" />
-            <Label layoutX="263.0" layoutY="24.0" />
-            <CheckBox layoutX="329.0" layoutY="24.0" mnemonicParsing="false" text="Admin" />
-            <Label layoutX="251.0" layoutY="65.0" text="Hotel name:" />
-            <TextField layoutX="337.0" layoutY="65.0" />
-            <Button layoutX="429.0" layoutY="250.0" mnemonicParsing="false" text="Create" />
-            <Label layoutX="251.0" layoutY="104.0" text="Location:" />
-            <TextField layoutX="337.0" layoutY="107.0" />
-            <Label layoutX="252.0" layoutY="145.0" text="Description:" />
-            <TextArea layoutX="334.0" layoutY="149.0" prefHeight="75.0" prefWidth="155.0" />
-            <Label layoutX="261.0" layoutY="303.0" text="Hotel:" />
-            <ListView layoutX="338.0" layoutY="303.0" prefHeight="25.0" prefWidth="148.0" />
-            <Label layoutX="261.0" layoutY="352.0" text="Room Type:" />
-            <ChoiceBox layoutX="337.0" layoutY="352.0" prefWidth="150.0" />
-            <Label layoutX="261.0" layoutY="398.0" text="Price:" />
-            <TextField layoutX="338.0" layoutY="394.0" />
-            <Button layoutX="436.0" layoutY="488.0" mnemonicParsing="false" text="Add" />
-            <Label layoutX="263.0" layoutY="448.0" text="Capacity:" />
-            <TextField layoutX="337.0" layoutY="444.0" />
+            <Label layoutX="102.0" layoutY="22.0" text="Hotel:" />
+            <Label layoutX="102.0" layoutY="67.0" text="Location:" />
+            <Label layoutX="221.0" layoutY="-2.0" text="Search" />
+            <TextField fx:id="hotelTextField" layoutX="165.0" layoutY="18.0" />
+            <TextField fx:id="locationTextField" layoutX="164.0" layoutY="63.0" />
+            <TextField fx:id="priceTextField" layoutX="165.0" layoutY="105.0" />
+            <Label layoutX="102.0" layoutY="109.0" text="Price:" />
+            <Label layoutX="100.0" layoutY="147.0" text="Rating:" />
+            <TextField layoutX="164.0" layoutY="143.0" />
+            <Label layoutX="384.0" layoutY="-2.0" text="Book" />
+            <Label layoutX="368.0" layoutY="40.0" text="Date From:" />
+            <Label layoutX="375.0" layoutY="114.0" text="Date To:" />
+            <DatePicker fx:id="FromDate" layoutX="324.0" layoutY="63.0" onAction="#FromMouseAction" />
+            <DatePicker fx:id="ToDate" layoutX="324.0" layoutY="143.0" onAction="#ToMouseAction" />
          </children>
       </AnchorPane>
    </right>
-   <center>
-      <TabPane prefHeight="564.0" prefWidth="170.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
-   </center>
 </BorderPane>
