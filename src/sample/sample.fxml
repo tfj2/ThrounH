@@ -22,12 +22,14 @@
          <children>
             <AnchorPane layoutX="100.0" layoutY="200.0" prefHeight="200.0" prefWidth="401.0">
                <children>
-                  <ListView fx:id="roomList" layoutY="56.0" onMouseClicked="#roomViewMouseClicked" prefHeight="200.0" prefWidth="200.0" />
-                  <ListView fx:id="roomPropertyList" layoutX="201.0" layoutY="56.0" prefHeight="200.0" prefWidth="200.0" />
-                  <Label layoutX="60.0" layoutY="31.0" text="Room List" />
-                  <Label layoutX="257.0" layoutY="31.0" text="Room Price" />
+                  <ListView fx:id="roomList" layoutY="42.0" onMouseClicked="#roomViewMouseClicked" prefHeight="212.0" prefWidth="200.0" />
+                  <ListView fx:id="roomPropertyList" layoutX="201.0" layoutY="42.0" prefHeight="38.0" prefWidth="200.0" />
+                  <Label layoutX="59.0" layoutY="14.0" text="Room List" />
+                  <Label layoutX="256.0" layoutY="14.0" text="Room Price" />
                   <Button fx:id="searchButton" layoutX="59.0" layoutY="-15.0" mnemonicParsing="false" onAction="#searchButtonPressed" prefHeight="21.0" prefWidth="52.0" text="Search" />
                   <Button fx:id="bookButton" layoutX="344.0" layoutY="-12.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="43.0" text="Book" />
+                  <ListView layoutX="201.0" layoutY="112.0" prefHeight="142.0" prefWidth="200.0" />
+                  <Label layoutX="235.0" layoutY="89.0" text="Room unavailability" />
                </children>
             </AnchorPane>
             <Label layoutX="102.0" layoutY="22.0" text="Hotel:" />
