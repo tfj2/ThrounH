@@ -61,29 +61,13 @@ public class Controller implements Initializable {
 
         // þarf að útfæra og hugsa út í facilities ...
         String facilities = "";
+
         Date from = null;
         Date to = null;
 
         theResult = searchController.search(location, minRating, facilities, maxPrice, name, from, to);
         hotelList.setItems(FXCollections.observableList(theResult));
 
-        /*
-
-        ArrayList<Accommodation> nameResult = searchController.findByName(nameQuery);
-        ArrayList<Accommodation> locationResult = searchController.findByLocation(locationQuery);
-        ArrayList<Accommodation> theResult = new ArrayList<>();
-        // birta svo sniðmengi af öllum dúddum sem ekki empty I guess retainAll er very coolif (!locationResult.isEmpty() && !nameResult.isEmpty())
-        if(!nameResult.isEmpty() && !locationResult.isEmpty()) {
-            nameResult.retainAll(locationResult);
-            theResult = nameResult;
-        }
-        else if (nameResult.isEmpty() && !locationResult.isEmpty()){
-            theResult = locationResult;
-        } else if (!nameResult.isEmpty() && locationResult.isEmpty()){
-            theResult = nameResult;
-        }
-
-     */
     }
     public void hotelViewMouseClicked(MouseEvent mouseEvent){
         Accommodation theHotel = (Accommodation) hotelList.getSelectionModel().getSelectedItem();
