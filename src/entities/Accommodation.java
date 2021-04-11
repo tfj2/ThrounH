@@ -32,11 +32,10 @@ public class Accommodation {
         this.description = description;
     }
 
-    public Accommodation(String id, String name, String location, ArrayList<Room> roomArrayList, ArrayList<String> managerIdArrayList) {
+    public Accommodation(String id, String name, String location, ArrayList<Room> roomArrayList, ArrayList<String> managerIdArrayList, double rating) {
         this.id = id;
         this.name = name;
         this.location = location;
-        this.rating = 0;
         this.roomArrayList = roomArrayList;
         this.managerIdArrayList = managerIdArrayList;
         this.reviewArrayList = new ArrayList<>();
