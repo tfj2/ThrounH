@@ -141,6 +141,7 @@ public class Controller implements Initializable {
     public void BookingClick(MouseEvent mouseEvent){
         Accommodation theHotel = (Accommodation) hotelList.getSelectionModel().getSelectedItem();
         RoomType theRoom = (RoomType) roomList.getSelectionModel().getSelectedItem();
+        Room theRoomR = null;
         java.sql.Date theFromDate = null;
         java.sql.Date theToDate = null;
         if(FromTo != null){
@@ -148,12 +149,14 @@ public class Controller implements Initializable {
             theToDate = java.sql.Date.valueOf(ToDate.getValue());
         }
         int place  = 0;
-        for(int count = 0; count<theHotel.getRoomArrayList().size(); count++){
-            if(theHotel.getRoomArrayList().get(count).getRoomType() == theRoom){
-                place = count;
+        if(theHotel != null){
+            for(int count = 0; count<theHotel.getRoomArrayList().size(); count++){
+                if(theHotel.getRoomArrayList().get(count).getRoomType() == theRoom){
+                    place = count;
+                }
             }
+            theRoomR = theHotel.getRoomArrayList().get(place);
         }
-        Room theRoomR = theHotel.getRoomArrayList().get(place);
         if(theHotel != null && theRoomR != null && theFromDate != null && theToDate != null){
             Booking b = new Booking(theHotel, theRoomR, theFromDate, theToDate);
             System.out.println(b.getBookingDateTo());
