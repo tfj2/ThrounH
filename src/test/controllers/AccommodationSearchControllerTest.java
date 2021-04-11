@@ -129,7 +129,7 @@ public class AccommodationSearchControllerTest {
     @Test
     public void testCombinedSearch() {
         ArrayList<Accommodation> byName = sc.findByName("kea");
-        ArrayList<Accommodation> byCombined = sc.search("", 0.0, "", 0.0, "kea", null, null);
+        ArrayList<Accommodation> byCombined = sc.search("", 0.0, 0.0, "kea", null, null);
         assertEquals(byName, byCombined);
     }
 }

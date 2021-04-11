@@ -1,5 +1,6 @@
 package entities;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class Accommodation {
@@ -69,8 +70,12 @@ public class Accommodation {
         this.rating = rating;
     }
 
-    public ArrayList<Room> getRoomArrayList() {
+    public ArrayList<Room> getAllRooms() {
         return roomArrayList;
+    }
+    public ArrayList<Room> getAvailableRooms(Date from, Date to) {
+
+        return new ArrayList<>();
     }
 
     public void setRoomArrayList(ArrayList<Room> roomArrayList) {

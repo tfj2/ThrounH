@@ -1,10 +1,13 @@
 package entities;
 
+import java.util.ArrayList;
+
 public class Room {
     private String roomId;
     private RoomType roomType;
     private double price;
     private int cap;
+    private ArrayList<Occupancy> occupancies;
 
     public RoomType getRoomType() {
         return roomType;
@@ -43,6 +46,14 @@ public class Room {
         this.price = price;
         this.cap = cap;
         this.roomType = roomType;
+        occupancies = new ArrayList<>();
+    }
+    public void addOccupancy(Occupancy occupancy) {
+        occupancies.add(occupancy);
+    }
+
+    public String toString() {
+        return roomType.toString();
     }
 }
 //siggigauti/video-leiga-support
