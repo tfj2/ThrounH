@@ -38,10 +38,6 @@ public class Controller implements Initializable {
     @FXML
     private TextField locationTextField;
     @FXML
-    private ChoiceBox priceChoice;
-    @FXML
-    private ChoiceBox ratingChoice;
-    @FXML
     private ListView roomList;
     @FXML
     private ListView roomPropertyList;
@@ -110,15 +106,8 @@ public class Controller implements Initializable {
     }
     @Override
     public void initialize(URL LOCATION, ResourceBundle resources) {
-        ArrayList<String> PriceOption = new ArrayList<>();
-        PriceOption.add(">");
-        PriceOption.add("<");
-        PriceOption.add("=");
+
         accommodationsShown = data.getAllHotels();
         hotelList.setItems(FXCollections.observableArrayList(accommodationsShown));
-        priceChoice.setItems(FXCollections.observableArrayList(PriceOption));
-        priceChoice.setValue(">");
-        ratingChoice.setItems(FXCollections.observableArrayList(PriceOption));
-        ratingChoice.setValue(">");
     }
 }
