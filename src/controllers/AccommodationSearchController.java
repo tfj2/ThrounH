@@ -54,12 +54,11 @@ public class AccommodationSearchController {
      * @param minRating double, <=0.0 ef á ekki að taka tillit til
      * @param maxPrice double, Double.POSITIVE_INFINITY ef á ekki að taka tillit til
      * @param name String, tómi strengurinn ef á ekki að taka tillit til
-     * @param from Date, null ef ekki á að taka tillit til.
-     * @param to Date, null ef ekki á að taka tillit til.
-     * @return ArrayList<Accommodation>, result úr leit.
+     * @return ArrayList<Accommodation>, result úr leit. Ath. að Accommodations innihalda method
+     *      getAvailableRooms(Date from, Date to) svo það sér um að vita availability
      */
     public ArrayList<Accommodation> search(String location, double minRating, double maxPrice,
-                                                         String name, Date from, Date to) {
+                                                         String name) {
 
         // init
         ArrayList<Accommodation> theResult = new ArrayList<>(data.getAllHotels());
@@ -69,7 +68,7 @@ public class AccommodationSearchController {
         // ArrayList<Accommodation> facilitiesResult = findByFacilities(facilities);
         ArrayList<Accommodation> ratingResult = findByRating(minRating);
         ArrayList<Accommodation> priceResult = findByPrice(maxPrice);
-        ArrayList<Accommodation> periodResult = findByTimePeriod(from, to);
+        // ArrayList<Accommodation> periodResult = findByTimePeriod(from, to);
 
 
         // finnum sniðmengi af þeim results úr queries sem innihalda ekki tóma strenginn (eða null í Date)
@@ -79,10 +78,6 @@ public class AccommodationSearchController {
         if(!location.equals("")) {
             System.out.println("location");
             theResult.retainAll(locationResult);
-        }
-        if(!isNull(from) && !isNull(to)) {
-            System.out.println("date");
-            theResult.retainAll(periodResult);
         }
         if(!name.equals("")) {
             System.out.println("name");
