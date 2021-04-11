@@ -8,15 +8,24 @@ public class Booking {
     private Accommodation accommodation;
     private Room room;
     private String id;
-    private String bookingDateFromTo; //Hvernig ætlum við að geyma þetta?
+    private java.sql.Date bookingDateFrom; //Hvernig ætlum við að geyma þetta?
+    private java.sql.Date bookingDateTo;
 
-    public Booking(User user, ArrayList<String> guests, Accommodation accommodation, Room room, String id, String bookingDateFromTo) {
+    public Booking(User user, ArrayList<String> guests, Accommodation accommodation, Room room, String id, java.sql.Date bookingDateFrom, java.sql.Date bookingDateTo) {
         this.user = user;
         this.guests = guests;
         this.accommodation = accommodation;
         this.room = room;
         this.id = id;
-        this.bookingDateFromTo = bookingDateFromTo;
+        this.bookingDateFrom = bookingDateFrom;
+        this.bookingDateTo = bookingDateTo;
+    }
+
+    public Booking(Accommodation accommodation, Room room, java.sql.Date bookingDateFrom, java.sql.Date bookingDateTo){
+        this.accommodation = accommodation;
+        this.room = room;
+        this.bookingDateFrom = bookingDateFrom;
+        this.bookingDateTo = bookingDateTo;
     }
 
     public User getUser() {
@@ -59,11 +68,19 @@ public class Booking {
         this.id = id;
     }
 
-    public String getBookingDateFromTo() {
-        return bookingDateFromTo;
+    public java.sql.Date getBookingDateFrom() {
+        return bookingDateFrom;
     }
 
-    public void setBookingDateFromTo(String bookingDateFromTo) {
-        this.bookingDateFromTo = bookingDateFromTo;
+    public void setBookingDateFrom(java.sql.Date bookingDateFrom) {
+        this.bookingDateFrom = bookingDateFrom;
+    }
+
+    public java.sql.Date getBookingDateTo() {
+        return bookingDateTo;
+    }
+
+    public void setBookingDateTo(java.sql.Date bookingDateTo) {
+        this.bookingDateTo = bookingDateTo;
     }
 }

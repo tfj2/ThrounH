@@ -5,8 +5,16 @@ import entities.Accommodation;
 import entities.Room;;
 import entities.User;
 
+import java.sql.Date;
+import java.util.ArrayList;
+
 
 public class AccommodationController {
+    private Accommodation theAccommodation;
+
+    public AccommodationController(Accommodation accommodation) {
+        this.theAccommodation = accommodation;
+    }
 
     public void addManagerId(User user) {
 
