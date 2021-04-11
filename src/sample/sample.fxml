@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
@@ -25,19 +26,24 @@
                   <ListView fx:id="roomPropertyList" layoutX="201.0" layoutY="56.0" prefHeight="200.0" prefWidth="200.0" />
                   <Label layoutX="60.0" layoutY="31.0" text="Room List" />
                   <Label layoutX="257.0" layoutY="31.0" text="Room Price" />
-                  <Button fx:id="bookButton" layoutX="236.0" layoutY="-12.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="43.0" text="Book" />
+                  <Button fx:id="searchButton" layoutX="59.0" layoutY="-15.0" mnemonicParsing="false" onAction="#searchButtonPressed" prefHeight="21.0" prefWidth="52.0" text="Search" />
+                  <Button fx:id="bookButton" layoutX="344.0" layoutY="-12.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="43.0" text="Book" />
                </children>
             </AnchorPane>
-            <Label layoutX="179.0" layoutY="27.0" text="Hotel:" />
-            <Label layoutX="170.0" layoutY="72.0" text="Location:" />
-            <Label layoutX="266.0" layoutY="6.0" text="Search" />
-            <TextField fx:id="hotelTextField" layoutX="226.0" layoutY="23.0" />
-            <TextField fx:id="locationTextField" layoutX="225.0" layoutY="68.0" />
-            <TextField fx:id="priceTextField" layoutX="226.0" layoutY="110.0" />
-            <Button fx:id="searchButton" layoutX="225.0" layoutY="188.0" mnemonicParsing="false" onAction="#searchButtonPressed" prefHeight="21.0" prefWidth="52.0" text="Search" />
-            <Label layoutX="180.0" layoutY="114.0" text="Price:" />
-            <Label layoutX="180.0" layoutY="152.0" text="Rating:" />
-            <TextField layoutX="225.0" layoutY="148.0" />
+            <Label layoutX="102.0" layoutY="22.0" text="Hotel:" />
+            <Label layoutX="102.0" layoutY="67.0" text="Location:" />
+            <Label layoutX="217.0" layoutY="6.0" text="Search" />
+            <TextField fx:id="hotelTextField" layoutX="165.0" layoutY="18.0" />
+            <TextField fx:id="locationTextField" layoutX="164.0" layoutY="63.0" />
+            <TextField fx:id="priceTextField" layoutX="165.0" layoutY="105.0" />
+            <Label layoutX="102.0" layoutY="109.0" text="Price:" />
+            <Label layoutX="100.0" layoutY="147.0" text="Rating:" />
+            <TextField layoutX="164.0" layoutY="143.0" />
+            <Label layoutX="370.0" layoutY="6.0" text="Book" />
+            <Label layoutX="368.0" layoutY="40.0" text="Date From:" />
+            <Label layoutX="375.0" layoutY="114.0" text="Date To:" />
+            <DatePicker layoutX="324.0" layoutY="63.0" />
+            <DatePicker layoutX="324.0" layoutY="143.0" />
          </children>
       </AnchorPane>
    </right>
