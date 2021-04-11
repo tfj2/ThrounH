@@ -31,7 +31,15 @@ public class Occupancy {
     }
 
     public static void main(String[] args) {
+        long now = System.currentTimeMillis();
+        Date sqlDateFrom = new Date(now);
+        Date sqlDateTo = new Date(now + (1000 * 60 * 60 * 24 * 7));
+        System.out.println(sqlDateFrom);
+        System.out.println(sqlDateTo);
 
+        Occupancy test = new Occupancy(sqlDateFrom, sqlDateTo);
+        System.out.println(test.getDateFrom());
+        System.out.println(test.getDateTo());
     }
 
 }
