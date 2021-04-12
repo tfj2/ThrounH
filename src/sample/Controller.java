@@ -1,5 +1,6 @@
 package sample;
 
+import controllers.AccommodationBookingController;
 import controllers.AccommodationSearchController;
 import entities.*;
 import javafx.collections.FXCollections;
@@ -107,7 +108,7 @@ public class Controller implements Initializable {
         theRoomPrice.add("" + theHotel.getAllRooms().get(place).getPrice());
         roomPropertyList.setItems(theRoomPrice);
     }
-    public void FromMouseAction(ActionEvent actionEvent) {
+    public void fromMouseAction(ActionEvent actionEvent) {
         java.sql.Date theFromDate = java.sql.Date.valueOf(FromDate.getValue());
         from = "" + theFromDate;
         if(to == null){
@@ -139,25 +140,12 @@ public class Controller implements Initializable {
             theFromDate = java.sql.Date.valueOf(FromDate.getValue());
             theToDate = java.sql.Date.valueOf(ToDate.getValue());
         }
-        int place  = 0;
-        /* þarf ekki fyrst Room er núna í lista en ekki RoomType
-        if(theHotel != null){
-            for(int count = 0; count<theHotel.getAllRooms().size(); count++){
-                if(theHotel.getAllRooms().get(count).getRoomType() == theRoom){
-                    place = count;
-                }
-            }
-            theRoomR = theHotel.getAllRooms().get(place);
-        }*/
+
         if(theHotel != null && theRoom != null && theFromDate != null && theToDate != null){
 
-            Occupancy occupancy = new Occupancy(theFromDate, theToDate);
-            theRoom.addOccupancy(occupancy);
-
             Booking b = new Booking(theHotel, theRoom, theFromDate, theToDate);
-            System.out.println(b.getBookingDateTo());
-            System.out.print(b);
-            System.out.println("Room booked");
+            AccommodationBookingController bc = new AccommodationBookingController();
+            bc.addBooking(b);
             roomList.setItems(FXCollections.observableArrayList(theHotel.getAvailableRooms(theFromDate, theToDate)));
         }
     }
