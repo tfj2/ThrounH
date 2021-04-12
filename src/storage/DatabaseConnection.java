@@ -2,19 +2,21 @@ package storage;
 
 import entities.Accommodation;
 import entities.Room;
+import entities.RoomType;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class DatabaseConnection /*implements Database*/ {
 
     private Connection conn = null;
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 
     public DatabaseConnection() {
         try {
@@ -40,6 +42,8 @@ public class DatabaseConnection /*implements Database*/ {
         try {
             Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection("jdbc:sqlite:hotel.db");
+            Statement stmt = conn.createStatement();
+            stmt.execute("PRAGMA foreign_keys = ON");
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -59,7 +63,7 @@ public class DatabaseConnection /*implements Database*/ {
     }
 
     //https://docs.oracle.com/cd/E35521_01/doc.111230/e24475/amxdatabase.htm#ADFMF1263
-    private void initializeDatabase() throws Exception {
+    public void initializeDatabase() throws Exception {
         InputStream scriptStream = null;
         Connection conn = null;
         //Class.forName("org.sqlite.JDBC");
@@ -68,19 +72,23 @@ public class DatabaseConnection /*implements Database*/ {
             // til að þetta sé óhátt stýrikerfi
             String fileName = "hotel.db"; // viljum kannski breyta seinna
             String dbDir = currDir + File.separator + "src" + File.separator + "storage" + File.separator;
-            String dbDir2 = dbDir.replace(File.separator, "/");
-            String dbName = dbDir2 + fileName;
+            //String dbDir2 = dbDir.replace(File.separator, "/");
+            //String dbName = dbDir2 + fileName;
+            String dbName = currDir + File.separator + fileName;
+            System.out.println(dbName);
 
-            String url = "jdbc:sqlite:" + dbName;
+            String url = "jdbc:sqlite:" + fileName;
 
             File dbFile = new File(dbName);
             if (dbFile.exists()) {
                 System.out.println("File exists");
-                Files.deleteIfExists(dbFile.toPath());
+                //Files.deleteIfExists(dbFile.toPath());
+                //System.out.println("File " + dbFile.toPath() + " was deleted.");
+                //createNewDatabase(url);
                 //    return;
             } else {
                 System.out.println("not exists");
-                createNewDatabase(url);
+                //createNewDatabase(url);
             }
 
             conn = DriverManager.getConnection(url);
@@ -100,7 +108,6 @@ public class DatabaseConnection /*implements Database*/ {
                     continue;
                 nextStatement.append(nextLine + "\n");
                 if (nextLine.endsWith(";")) {
-                    System.out.println(nextStatement.toString());
                     stmt.execute(nextStatement.toString());
                     nextStatement = new StringBuffer();
                 }
@@ -128,30 +135,73 @@ public class DatabaseConnection /*implements Database*/ {
         closeConnection();
     }
 
- /*   public ArrayList<Accommodation> getAllAcc() throws Exception {
+    public ArrayList<Accommodation> getAllAcc() throws Exception {
         getConnection();
         Statement stmt = conn.createStatement();
-        //ResultSet rs = stmt.executeQuery();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM Accommodation");
+        ArrayList<Accommodation> res = new ArrayList<Accommodation>();
+        while (rs.next()) {
+            ArrayList<Room> rooms = getRoomsByAccId(rs.getInt("id"));
+            res.add(
+                    new Accommodation(
+                            rs.getInt("id"),
+                            rs.getString("name"),
+                            rs.getString("location"),
+                            rooms,
+                            rs.getDouble("rating")
+                    )
+            );
+        }
+        rs.close();
         closeConnection();
+        return res;
     }
-*/
-    public void createRoom(Room room) throws Exception {
+
+
+    public void createRoom(Room room, int accId) throws Exception {
         getConnection();
         String q = "INSERT INTO Room "
-                + "(roomType, price, cap)"
-                + "VALUES (?,?,?)";
+                + "(roomType, price, cap, accId )"
+                + "VALUES (?,?,?,?)";
         PreparedStatement pstmt = conn.prepareStatement(q);
-        pstmt.setString(1, room.getRoomType().name()); // þvi þetta er enum
+        pstmt.setString(1, room.toString());
         pstmt.setDouble(2, room.getPrice());
         pstmt.setInt(3, room.getCap());
+        pstmt.setInt(4, accId);
         pstmt.executeUpdate();
         pstmt.close();
         closeConnection();
     }
 
+    public void getAllRooms() throws Exception {
+
+    }
+
+    public ArrayList<Room> getRoomsByAccId(int accId) throws Exception {
+        getConnection();
+        PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Room WHERE accId = ?");
+        ArrayList<Room> res = new ArrayList<Room>();
+        pstmt.setInt(1, accId);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            Room room = new Room(
+                    rs.getInt("id"),
+                    rs.getDouble("price"),
+                    RoomType.valueOf(rs.getString("roomType")),
+                    rs.getInt("cap")
+            );
+            res.add(room);
+        }
+        pstmt.close();
+        rs.close();
+        closeConnection();
+        return res;
+    }
+
 
     public static void main(String[] args) throws Exception {
-        DatabaseConnection test = new DatabaseConnection();
+        DatabaseConnection connection = new DatabaseConnection();
+        connection.initializeDatabase();
 
     }
 

@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class Room {
-    private String roomId;
+    private int roomId;
     private RoomType roomType;
     private double price;
     private int cap;
@@ -18,11 +18,11 @@ public class Room {
         this.roomType = roomType;
     }
 
-    public String getRoomId() {
+    public int getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(String roomId) {
+    public void setRoomId(int roomId) {
         this.roomId = roomId;
     }
 
@@ -42,7 +42,7 @@ public class Room {
         this.cap = cap;
     }
 
-    public Room(String roomId, double price, RoomType roomType, int cap) {
+    public Room(int roomId, double price, RoomType roomType, int cap) {
         this.roomId = roomId;
         this.price = price;
         this.cap = cap;
@@ -72,7 +72,7 @@ public class Room {
     }
 
     public static void main(String[] args) {
-        Room room = new Room("1", 10000, RoomType.Single, 1);
+        Room room = new Room(1, 10000, RoomType.Single, 1);
 
         long now = System.currentTimeMillis();
         Date sqlDateFrom = new Date(now);

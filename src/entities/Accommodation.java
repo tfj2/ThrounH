@@ -4,12 +4,11 @@ import controllers.AccommodationSearchController;
 import storage.DataFactory;
 import storage.DatabaseMock;
 
-import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 
 public class Accommodation {
-    private String id;
+    private int id;
     private String name;
     // private ArrayList<>; // arraylist fyrir facilities
     private String location;
@@ -21,7 +20,7 @@ public class Accommodation {
     private String description;
 
     // ma baeta vid minni smidum,
-    public Accommodation(String id, String name, String location, double rating, ArrayList<Room> roomArrayList, ArrayList<String> managerIdArrayList, ArrayList<Review> reviewArrayList, String description) {
+    public Accommodation(int id, String name, String location, double rating, ArrayList<Room> roomArrayList, ArrayList<String> managerIdArrayList, ArrayList<Review> reviewArrayList, String description) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -32,7 +31,7 @@ public class Accommodation {
         this.description = description;
     }
 
-    public Accommodation(String id, String name, String location, ArrayList<Room> roomArrayList, ArrayList<String> managerIdArrayList, double rating) {
+    public Accommodation(int id, String name, String location, ArrayList<Room> roomArrayList, ArrayList<String> managerIdArrayList, double rating) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -40,13 +39,25 @@ public class Accommodation {
         this.managerIdArrayList = managerIdArrayList;
         this.reviewArrayList = new ArrayList<>();
         this.description = "";
+        this.rating = rating;
     }
 
-    public String getId() {
+    public Accommodation(int id, String name, String location, ArrayList<Room> roomArrayList, double rating) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.roomArrayList = roomArrayList;
+        this.managerIdArrayList = new ArrayList<>();
+        this.reviewArrayList = new ArrayList<>();
+        this.description = "";
+        this.rating = rating;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -55,7 +66,7 @@ public class Accommodation {
     }
 
     public void setName(String name) {
-        this.name = id;
+        this.name = name;
     }
 
     public String getLocation() {
@@ -81,8 +92,8 @@ public class Accommodation {
     public ArrayList<Room> getAvailableRooms(Date from, Date to) {
         ArrayList<Room> availableRooms = new ArrayList<>();
 
-        for(Room room : roomArrayList) {
-            if(!isOccupied(room.getOccupancies(), from, to)) {
+        for (Room room : roomArrayList) {
+            if (!isOccupied(room.getOccupancies(), from, to)) {
                 availableRooms.add(room);
             }
         }
@@ -91,29 +102,28 @@ public class Accommodation {
     }
 
     /**
-     *
      * @param occupancies listi af occupancies herbergis
-     * @param from byrjun á tíma til skoðunar
-     * @param to   lok tíma til skoðunar
+     * @param from        byrjun á tíma til skoðunar
+     * @param to          lok tíma til skoðunar
      * @return true ef herbergi er upptekið á þessum tíma, false annars
      */
     private boolean isOccupied(ArrayList<Occupancy> occupancies, Date from, Date to) {
         boolean occupied = false;
-        for(Occupancy occupancy : occupancies) {
+        for (Occupancy occupancy : occupancies) {
             Date occFrom = occupancy.getDateFrom();
             Date occTo = occupancy.getDateTo();
             // occupied ef occFrom eða occTo er á milli from og to.
             // einnig occupied ef tímabil occupancy nær yfir from og to
-            if (occFrom.compareTo(from)>=0 && occFrom.compareTo(to)<=0) {
+            if (occFrom.compareTo(from) >= 0 && occFrom.compareTo(to) <= 0) {
                 // occFrom er á milli from og to
                 occupied = true;
             }
-            if (occTo.compareTo(from)>=0 && occTo.compareTo(to)<=0) {
+            if (occTo.compareTo(from) >= 0 && occTo.compareTo(to) <= 0) {
                 // occTo er á milli from og to
                 occupied = true;
             }
 
-            if (occFrom.compareTo(from)<0 && occTo.compareTo(to)>0) {
+            if (occFrom.compareTo(from) < 0 && occTo.compareTo(to) > 0) {
                 // from to er innihaldid í occupancy
                 occupied = true;
             }
@@ -174,8 +184,8 @@ public class Accommodation {
         System.out.println(roomsOfHotel);
         System.out.println(hotelPig);
 
-        Date bookFrom = new Date(now+(1000 * 60 * 60 * 24 * 8));
-        Date bookTo = new Date(now+(1000 * 60 * 60 * 24 * 10));
+        Date bookFrom = new Date(now + (1000 * 60 * 60 * 24 * 8));
+        Date bookTo = new Date(now + (1000 * 60 * 60 * 24 * 10));
 
         roomPig.addOccupancy(new Occupancy(bookFrom, bookTo));
         ArrayList<Room> availableRooms = hotelPig.getAvailableRooms(sqlDateFrom, sqlDateTo);
