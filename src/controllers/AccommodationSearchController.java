@@ -4,6 +4,7 @@ import entities.Accommodation;
 import entities.Room;
 import storage.Database;
 
+import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ public class AccommodationSearchController {
     }
 
 
-    public ArrayList<Room> filterByPrice(Accommodation accommodation, double maxPrice) {
+    public ArrayList<Room> filterRoomsByPrice(Accommodation accommodation, double maxPrice) {
         ArrayList<Room> result = new ArrayList<>();
 
         for (Room room : accommodation.getAllRooms()) {
@@ -35,6 +36,22 @@ public class AccommodationSearchController {
                 result.add(room);
             }
         }
+        return result;
+    }
+
+    public ArrayList<Room> filterRoomsByPeriod(Accommodation accommodation, Date from, Date to) {
+        // pæling hvort við viljum leyfa from og to að vera null
+        if(accommodation!=null&&from!=null&&to!=null) {
+            return accommodation.getAvailableRooms(from, to);
+        }
+        // else
+        return new ArrayList<>();
+    }
+
+    public ArrayList<Room> filterRoomsByPriceAndPeriod(Accommodation accommodation, double maxPrice, Date from, Date to) {
+        ArrayList<Room> result = new ArrayList<>();
+        result.addAll(accommodation.getAvailableRooms(from, to));
+        result.retainAll(filterRoomsByPrice(accommodation, maxPrice));
         return result;
     }
 
@@ -53,7 +70,6 @@ public class AccommodationSearchController {
      *      til sumra þeirra.
      * @param location String, tómi strengurinn ef á ekki að taka tillit til
      * @param minRating double, <=0.0 ef á ekki að taka tillit til
-     * @param maxPrice double, Double.POSITIVE_INFINITY ef á ekki að taka tillit til
      * @param name String, tómi strengurinn ef á ekki að taka tillit til
      * @return ArrayList<Accommodation>, result úr leit. Ath. að Accommodations innihalda method
      *      getAvailableRooms(Date from, Date to) svo það sér um að vita availability

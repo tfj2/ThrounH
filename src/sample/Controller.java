@@ -16,7 +16,6 @@ import storage.DataFactory;
 import storage.DatabaseMock;
 
 import java.net.URL;
-import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -62,15 +61,12 @@ public class Controller implements Initializable {
 
         // default gildi
         double minRating = 0.0;
-        // default gildi
-        double maxPrice = Double.POSITIVE_INFINITY;
 
         String location = locationTextField.getCharacters().toString();
         String name = hotelTextField.getCharacters().toString();
 
         if(ratingTextField != null && !ratingTextField.getCharacters().toString().equals(""))
             minRating = Double.parseDouble(ratingTextField.getCharacters().toString());
-        System.out.println(minRating);
         Date from = null;
         Date to = null;
 
@@ -78,23 +74,26 @@ public class Controller implements Initializable {
         hotelList.setItems(FXCollections.observableList(hotelsResult));
 
         // uppfærum room list þannig það sýni herbergi úr fyrsta hotelið í leit:
+
         Accommodation theHotel = hotelsResult.get(0);
         ArrayList<Room> roomsToShow = new ArrayList<>();
+
         ArrayList<Room> roomsFilteredByPrice = null;
         if(fromTo != null ){
             from = java.sql.Date.valueOf(FromDate.getValue());
             to = java.sql.Date.valueOf(ToDate.getValue());
-            roomsToShow.addAll(theHotel.getAvailableRooms(from, to));
+            roomsToShow.addAll(searchController.filterRoomsByPeriod(theHotel, from, to));
         } else {
             // engin dagsetning valin, sýnum öll herbergi
             roomsToShow.addAll(theHotel.getAllRooms());
         }
         String price = priceTextField.getCharacters().toString();
         if (!price.equals("")) {
-            roomsFilteredByPrice = searchController.filterByPrice(theHotel, Double.parseDouble(price));
+            roomsFilteredByPrice = searchController.filterRoomsByPrice(theHotel, Double.parseDouble(price));
+            // snidmengi af fyrra roomsToShow og thessu...
             roomsToShow.retainAll(roomsFilteredByPrice);
         }
-
+        // search controller inniheldur lika fall filterRoomsByPriceAndPeriod ef thid viljid frekar
         roomList.setItems(FXCollections.observableArrayList(roomsToShow));
 
     }
@@ -105,22 +104,25 @@ public class Controller implements Initializable {
         java.sql.Date from = null;
         java.sql.Date to = null;
 
+
         ArrayList<Room> roomsToShow = new ArrayList<>();
+
         ArrayList<Room> roomsFilteredByPrice = null;
         if(fromTo != null ){
             from = java.sql.Date.valueOf(FromDate.getValue());
             to = java.sql.Date.valueOf(ToDate.getValue());
-            roomsToShow.addAll(theHotel.getAvailableRooms(from, to));
+            roomsToShow.addAll(searchController.filterRoomsByPeriod(theHotel, from, to));
         } else {
             // engin dagsetning valin, sýnum öll herbergi
             roomsToShow.addAll(theHotel.getAllRooms());
         }
         String price = priceTextField.getCharacters().toString();
         if (!price.equals("")) {
-            roomsFilteredByPrice = searchController.filterByPrice(theHotel, Double.parseDouble(price));
+            roomsFilteredByPrice = searchController.filterRoomsByPrice(theHotel, Double.parseDouble(price));
+            // snidmengi af fyrra roomsToShow og thessu...
             roomsToShow.retainAll(roomsFilteredByPrice);
         }
-
+        // search controller inniheldur lika fall filterRoomsByPriceAndPeriod ef thid viljid frekar
         roomList.setItems(FXCollections.observableArrayList(roomsToShow));
     }
 

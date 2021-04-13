@@ -83,7 +83,7 @@ public class AccommodationSearchControllerTest {
     public void testFindByNameCaseInsensitive() {
         assertEquals(sc.findByName("hoTel"), sc.findByName("Hotel"));
     }
-    
+
 
     @Test
     public void testFindByRatingNegative() {
