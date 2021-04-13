@@ -40,6 +40,7 @@ public class Accommodation {
         this.managerIdArrayList = managerIdArrayList;
         this.reviewArrayList = new ArrayList<>();
         this.description = "";
+        this.rating = rating;
     }
 
     public String getId() {

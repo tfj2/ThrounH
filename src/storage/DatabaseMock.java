@@ -50,6 +50,7 @@ public class DatabaseMock implements Database {
 
         ArrayList<Accommodation> result = new ArrayList<>();
         for (Accommodation acc : accommodations) {
+            System.out.println(acc.getRating());
             if(acc.getRating() >= minRating) {
                 result.add(acc);
             }

@@ -1,13 +1,11 @@
 package controllers;
 
 import entities.Accommodation;
+import entities.Room;
 import storage.Database;
 
-import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
-
-import static java.util.Objects.isNull;
 
 
 public class AccommodationSearchController {
@@ -29,8 +27,15 @@ public class AccommodationSearchController {
     }
 
 
-    public ArrayList<Accommodation> findByPrice(double maxPrice) {
-        return data.getHotelsByPrice(maxPrice);
+    public ArrayList<Room> filterByPrice(Accommodation accommodation, double maxPrice) {
+        ArrayList<Room> result = new ArrayList<>();
+
+        for (Room room : accommodation.getAllRooms()) {
+            if(room.getPrice()<=maxPrice) {
+                result.add(room);
+            }
+        }
+        return result;
     }
 
     public ArrayList<Accommodation> findByName(String name) {
@@ -53,7 +58,7 @@ public class AccommodationSearchController {
      * @return ArrayList<Accommodation>, result úr leit. Ath. að Accommodations innihalda method
      *      getAvailableRooms(Date from, Date to) svo það sér um að vita availability
      */
-    public ArrayList<Accommodation> search(String location, double minRating, double maxPrice,
+    public ArrayList<Accommodation> search(String location, double minRating,
                                                          String name) {
 
         // init
@@ -61,12 +66,9 @@ public class AccommodationSearchController {
 
         ArrayList<Accommodation> nameResult = findByName(name);
         ArrayList<Accommodation> locationResult = findByLocation(location);
-        // ArrayList<Accommodation> facilitiesResult = findByFacilities(facilities);
         ArrayList<Accommodation> ratingResult = findByRating(minRating);
-        ArrayList<Accommodation> priceResult = findByPrice(maxPrice);
-        // ArrayList<Accommodation> periodResult = findByTimePeriod(from, to);
 
-
+        System.out.println(ratingResult);
         // finnum sniðmengi af þeim results úr queries sem innihalda ekki tóma strenginn (eða null í Date)
         // munum alltaf nota minRating og maxPrice, g.r.f. 0 og inf default gildum ef ekki á að leita eftir því
         theResult.retainAll(ratingResult);

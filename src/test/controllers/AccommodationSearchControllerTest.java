@@ -35,10 +35,10 @@ public class AccommodationSearchControllerTest {
         managerIds.add("1");
         managerIds.add("2");
 
-        acc1 = new Accommodation("1", "Hilton", "Reykjavik", rooms, managerIds);
-        acc2 = new Accommodation("2", "Kea", "Akureyri", rooms, managerIds);
-        acc3 = new Accommodation("3", "Hotel Selfoss", "Selfoss", rooms, managerIds);
-        acc4 = new Accommodation("4", "Grand Hotel", "Reykjavik", rooms, managerIds);
+        acc1 = new Accommodation("1", "Hilton", "Reykjavik", rooms, managerIds, 0.1);
+        acc2 = new Accommodation("2", "Kea", "Akureyri", rooms, managerIds, 0.5);
+        acc3 = new Accommodation("3", "Hotel Selfoss", "Selfoss", rooms, managerIds, 3.5);
+        acc4 = new Accommodation("4", "Grand Hotel", "Reykjavik", rooms, managerIds,5.0);
 
         mockData.add(acc1);
         mockData.add(acc2);
@@ -129,7 +129,7 @@ public class AccommodationSearchControllerTest {
     @Test
     public void testCombinedSearch() {
         ArrayList<Accommodation> byName = sc.findByName("kea");
-        ArrayList<Accommodation> byCombined = sc.search("", 0.0, 0.0, "kea");
+        ArrayList<Accommodation> byCombined = sc.search("", 0.0, "kea");
         assertEquals(byName, byCombined);
     }
 }

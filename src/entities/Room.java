@@ -68,7 +68,7 @@ public class Room {
     }
 
     public String toString() {
-        return roomType.toString();
+        return roomType.toString() +", kr. " +getPrice();
     }
 
     public static void main(String[] args) {
