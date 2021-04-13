@@ -63,10 +63,5 @@ public class DatabaseMock implements Database {
         return accommodations;
     }
 
-    @Override
-    public ArrayList<Accommodation> getHotelsByPrice(double maxPrice) {
-        ArrayList<Accommodation> result = accommodations;
-        // vantar ehv concept of price.. finna average price fyrst?
-        return result;
-    }
+
 }
