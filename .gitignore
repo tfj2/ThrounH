@@ -5,5 +5,6 @@ out/
 out
 production
 ThrounH.iml
+*.db
 
 
