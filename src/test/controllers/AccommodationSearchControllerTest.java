@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import storage.DatabaseMock;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
@@ -29,16 +28,17 @@ public class AccommodationSearchControllerTest {
     @Before
     public void setUp() {
         ArrayList<Room> rooms = new ArrayList<>();
-        rooms.add(new Room("1", 10000, RoomType.Single, 1));
+        rooms.add(new Room(1, 10000, RoomType.Single, 1));
 
         ArrayList<String> managerIds = new ArrayList<>();
         managerIds.add("1");
         managerIds.add("2");
 
-        acc1 = new Accommodation("1", "Hilton", "Reykjavik", rooms, managerIds, 0.1);
-        acc2 = new Accommodation("2", "Kea", "Akureyri", rooms, managerIds, 0.5);
-        acc3 = new Accommodation("3", "Hotel Selfoss", "Selfoss", rooms, managerIds, 3.5);
-        acc4 = new Accommodation("4", "Grand Hotel", "Reykjavik", rooms, managerIds,5.0);
+
+        acc1 = new Accommodation(1, "Hilton", "Reykjavik", rooms, managerIds, 0.0);
+        acc2 = new Accommodation(2, "Kea", "Akureyri", rooms, managerIds, 2.0);
+        acc3 = new Accommodation(3, "Hotel Selfoss", "Selfoss", rooms, managerIds, 4.0);
+        acc4 = new Accommodation(4, "Grand Hotel", "Reykjavik", rooms, managerIds, 5.0);
 
         mockData.add(acc1);
         mockData.add(acc2);

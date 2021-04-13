@@ -7,6 +7,12 @@ public class User {
     private boolean manager;
     private String name;
 
+    public User(int id, boolean manager, String name) {
+        this.id = id;
+        this.manager = manager;
+        this.name = name;
+    }
+
     public User(boolean manager, String name) {
         this.manager = manager;
         this.name = name;
@@ -17,7 +23,7 @@ public class User {
     }
 
     public void setManager(boolean manager) {
-        manager = manager;
+        this.manager = manager;
     }
 
     public String getName() {
@@ -26,5 +32,9 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public static void main(String[] args) {
+
     }
 }
