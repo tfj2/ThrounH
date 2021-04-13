@@ -83,19 +83,7 @@ public class AccommodationSearchControllerTest {
     public void testFindByNameCaseInsensitive() {
         assertEquals(sc.findByName("hoTel"), sc.findByName("Hotel"));
     }
-
-    @Test
-    public void testFindByRating() {
-        ArrayList<Accommodation> result1 = sc.findByRating(0);
-        ArrayList<Accommodation> result2 = sc.findByRating(1);
-
-        // g.r.f. að allir hafa 0 í rating
-        ArrayList<Accommodation> expected1 = mockData;
-        ArrayList<Accommodation> expected2 = new ArrayList<>();
-
-        assertEquals(result1, expected1);
-        assertEquals(result2, expected2);
-    }
+    
 
     @Test
     public void testFindByRatingNegative() {
