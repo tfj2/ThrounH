@@ -258,11 +258,6 @@ public class DataFactory implements Database {
     }
 
     @Override
-    public ArrayList<Accommodation> getHotelsByPrice(double maxPrice) {
-        return null;
-    }
-
-    @Override
     public ArrayList<Accommodation> getHotelsByTimePeriod(Date from, Date to) {
         return new ArrayList<>();
     }

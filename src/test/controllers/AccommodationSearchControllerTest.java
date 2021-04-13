@@ -34,6 +34,7 @@ public class AccommodationSearchControllerTest {
         managerIds.add("1");
         managerIds.add("2");
 
+
         acc1 = new Accommodation(1, "Hilton", "Reykjavik", rooms, managerIds, 0.0);
         acc2 = new Accommodation(2, "Kea", "Akureyri", rooms, managerIds, 2.0);
         acc3 = new Accommodation(3, "Hotel Selfoss", "Selfoss", rooms, managerIds, 4.0);
@@ -83,18 +84,6 @@ public class AccommodationSearchControllerTest {
         assertEquals(sc.findByName("hoTel"), sc.findByName("Hotel"));
     }
 
-    @Test
-    public void testFindByRating() {
-        ArrayList<Accommodation> result1 = sc.findByRating(0);
-        ArrayList<Accommodation> result2 = sc.findByRating(1);
-
-        // g.r.f. að allir hafa 0 í rating
-        ArrayList<Accommodation> expected1 = mockData;
-        ArrayList<Accommodation> expected2 = new ArrayList<>();
-
-        assertEquals(result1, expected1);
-        assertEquals(result2, expected2);
-    }
 
     @Test
     public void testFindByRatingNegative() {
@@ -128,7 +117,7 @@ public class AccommodationSearchControllerTest {
     @Test
     public void testCombinedSearch() {
         ArrayList<Accommodation> byName = sc.findByName("kea");
-        ArrayList<Accommodation> byCombined = sc.search("", 0.0, 0.0, "kea");
+        ArrayList<Accommodation> byCombined = sc.search("", 0.0, "kea");
         assertEquals(byName, byCombined);
     }
 }

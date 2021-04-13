@@ -50,6 +50,7 @@ public class DatabaseMock implements Database {
 
         ArrayList<Accommodation> result = new ArrayList<>();
         for (Accommodation acc : accommodations) {
+            System.out.println(acc.getRating());
             if(acc.getRating() >= minRating) {
                 result.add(acc);
             }
@@ -62,10 +63,5 @@ public class DatabaseMock implements Database {
         return accommodations;
     }
 
-    @Override
-    public ArrayList<Accommodation> getHotelsByPrice(double maxPrice) {
-        ArrayList<Accommodation> result = accommodations;
-        // vantar ehv concept of price.. finna average price fyrst?
-        return result;
-    }
+
 }

@@ -10,8 +10,6 @@ public interface Database {
     ArrayList<Accommodation> getHotelsByLocation(String location);
     ArrayList<Accommodation> getHotelsByTimePeriod(Date from, Date to);
     ArrayList<Accommodation> getHotelsByRating(double minRating);
-    //ArrayList<Accommodation> getHotelsByFacilities(String facilities);
-    ArrayList<Accommodation> getHotelsByPrice(double maxPrice);
     ArrayList<Accommodation> getHotelsByName(String name);
 }
 
