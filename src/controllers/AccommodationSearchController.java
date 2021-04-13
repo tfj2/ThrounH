@@ -4,27 +4,41 @@ import entities.Accommodation;
 import entities.Room;
 import storage.Database;
 
-import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 
 
 public class AccommodationSearchController {
     private Database data;
-    private ArrayList<Accommodation>  accommodations;
+    private ArrayList<Accommodation> accommodations;
 
     public AccommodationSearchController(Database data) {
 
         this.data = data;
-        accommodations = data.getAllHotels();
+        try {
+            accommodations = data.getAllHotels();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
     }
 
     public ArrayList<Accommodation> findByLocation(String location) {
-        return data.getHotelsByLocation(location);
+        try {
+            return data.getHotelsByLocation(location);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return null; // laga!!
     }
 
     public ArrayList<Accommodation> findByRating(double minRating) {
-        return data.getHotelsByRating(minRating);
+        try {
+            return data.getHotelsByRating(minRating);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return null; // laga!! hotfix til ad geta buildad eftir DatabaseConnection impladi Database Interface
     }
 
 
@@ -32,7 +46,7 @@ public class AccommodationSearchController {
         ArrayList<Room> result = new ArrayList<>();
 
         for (Room room : accommodation.getAllRooms()) {
-            if(room.getPrice()<=maxPrice) {
+            if (room.getPrice() <= maxPrice) {
                 result.add(room);
             }
         }
@@ -41,7 +55,7 @@ public class AccommodationSearchController {
 
     public ArrayList<Room> filterRoomsByPeriod(Accommodation accommodation, Date from, Date to) {
         // pæling hvort við viljum leyfa from og to að vera null
-        if(accommodation!=null&&from!=null&&to!=null) {
+        if (accommodation != null && from != null && to != null) {
             return accommodation.getAvailableRooms(from, to);
         }
         // else
@@ -56,49 +70,58 @@ public class AccommodationSearchController {
     }
 
     public ArrayList<Accommodation> findByName(String name) {
-        return data.getHotelsByName(name);
+        try {
+            return data.getHotelsByName(name);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return null; /// sama og hitt!! aLAGA
+
     }
 
-    public ArrayList<Accommodation> findByTimePeriod(Date from, Date to) {
-        return data.getHotelsByTimePeriod(from, to);
-    }
 
     // endurrada args
+
     /**
-     *
      * Fall sem leitar að gistingu eftir ákveðnum skilyrðum. Sjá nánar fyrir hvern og einn param ef á bara að taka tillit
-     *      til sumra þeirra.
-     * @param location String, tómi strengurinn ef á ekki að taka tillit til
+     * til sumra þeirra.
+     *
+     * @param location  String, tómi strengurinn ef á ekki að taka tillit til
      * @param minRating double, <=0.0 ef á ekki að taka tillit til
-     * @param name String, tómi strengurinn ef á ekki að taka tillit til
+     * @param name      String, tómi strengurinn ef á ekki að taka tillit til
      * @return ArrayList<Accommodation>, result úr leit. Ath. að Accommodations innihalda method
-     *      getAvailableRooms(Date from, Date to) svo það sér um að vita availability
+     * getAvailableRooms(Date from, Date to) svo það sér um að vita availability
      */
     public ArrayList<Accommodation> search(String location, double minRating,
-                                                         String name) {
+                                           String name) {
 
         // init
-        ArrayList<Accommodation> theResult = new ArrayList<>(data.getAllHotels());
+        try {
+            ArrayList<Accommodation> theResult = new ArrayList<>(data.getAllHotels());
+            ArrayList<Accommodation> nameResult = findByName(name);
+            ArrayList<Accommodation> locationResult = findByLocation(location);
+            ArrayList<Accommodation> ratingResult = findByRating(minRating);
 
-        ArrayList<Accommodation> nameResult = findByName(name);
-        ArrayList<Accommodation> locationResult = findByLocation(location);
-        ArrayList<Accommodation> ratingResult = findByRating(minRating);
 
-        System.out.println(ratingResult);
-        // finnum sniðmengi af þeim results úr queries sem innihalda ekki tóma strenginn (eða null í Date)
-        // munum alltaf nota minRating og maxPrice, g.r.f. 0 og inf default gildum ef ekki á að leita eftir því
-        theResult.retainAll(ratingResult);
+            System.out.println(ratingResult);
+            // finnum sniðmengi af þeim results úr queries sem innihalda ekki tóma strenginn (eða null í Date)
+            // munum alltaf nota minRating og maxPrice, g.r.f. 0 og inf default gildum ef ekki á að leita eftir því
+            theResult.retainAll(ratingResult);
 
-        if(!location.equals("")) {
-            System.out.println("location");
-            theResult.retainAll(locationResult);
+            if (!location.equals("")) {
+                System.out.println("location");
+                theResult.retainAll(locationResult);
+            }
+            if (!name.equals("")) {
+                System.out.println("name");
+                theResult.retainAll(nameResult);
+            }
+
+            return theResult;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
-        if(!name.equals("")) {
-            System.out.println("name");
-            theResult.retainAll(nameResult);
-        }
-
-        return theResult;
+        return null;
     }
 
     public static void main(String[] args) {

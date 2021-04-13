@@ -4,10 +4,9 @@ import entities.Accommodation;
 import entities.Room;
 import entities.RoomType;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
-public class DataFactory implements Database {
+public class DataFactory /*implements Database*/ {
     public DataFactory() {
     }
 
@@ -242,6 +241,7 @@ public class DataFactory implements Database {
         return accommodations;
     }
 
+    /*
     public ArrayList<Accommodation> getHotelsByLocation(String location) {
         System.out.println("bara til að vera legal");
         return new ArrayList<Accommodation>();
@@ -257,10 +257,8 @@ public class DataFactory implements Database {
         return null;
     }
 
-    @Override
-    public ArrayList<Accommodation> getHotelsByTimePeriod(Date from, Date to) {
-        return new ArrayList<>();
-    }
+     */
+
 
     public static void main(String[] args) {
         DataFactory df = new DataFactory();
