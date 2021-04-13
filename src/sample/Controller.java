@@ -104,7 +104,7 @@ public class Controller implements Initializable {
         java.sql.Date from = null;
         java.sql.Date to = null;
 
-
+        // ath ad searchController inniheldur lika fall filterRoomsByPriceAndPeriod ef thid viljid frekar
         ArrayList<Room> roomsToShow = new ArrayList<>();
 
         ArrayList<Room> roomsFilteredByPrice = null;
@@ -122,7 +122,6 @@ public class Controller implements Initializable {
             // snidmengi af fyrra roomsToShow og thessu...
             roomsToShow.retainAll(roomsFilteredByPrice);
         }
-        // search controller inniheldur lika fall filterRoomsByPriceAndPeriod ef thid viljid frekar
         roomList.setItems(FXCollections.observableArrayList(roomsToShow));
     }
 

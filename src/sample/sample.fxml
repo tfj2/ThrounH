@@ -38,7 +38,7 @@
             <TextField fx:id="hotelTextField" layoutX="165.0" layoutY="18.0" />
             <TextField fx:id="locationTextField" layoutX="164.0" layoutY="63.0" />
             <TextField fx:id="priceTextField" layoutX="165.0" layoutY="105.0" />
-            <Label layoutX="102.0" layoutY="109.0" text="Price:" />
+            <Label layoutX="102.0" layoutY="109.0" text="Max price:" />
             <Label layoutX="100.0" layoutY="147.0" text="Rating:" />
             <TextField fx:id="ratingTextField" layoutX="164.0" layoutY="143.0" />
             <Label layoutX="384.0" layoutY="-2.0" text="Book" />
