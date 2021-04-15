@@ -345,26 +345,7 @@ public class DatabaseSetup {
         accommodations.add(acc14);
         return accommodations;
     }
-
-    /*
-    public ArrayList<Accommodation> getHotelsByLocation(String location) {
-        System.out.println("bara til að vera legal");
-        return new ArrayList<Accommodation>();
-    }
-
-    @Override
-    public ArrayList<Accommodation> getHotelsByName(String name) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Accommodation> getHotelsByRating(double minRating) {
-        return null;
-    }
-
-     */
-
-
+    
     public static void main(String[] args) {
         DatabaseSetup df = new DatabaseSetup();
         df.pumpIntoDatabase();

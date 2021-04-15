@@ -78,7 +78,6 @@ public class Controller implements Initializable {
 
         // uppfærum room list þannig það sýni herbergi úr fyrsta hotelið í leit:
 
-        System.out.println(hotelsResult);
         if (hotelsResult != null) {
             Accommodation theHotel = hotelsResult.get(0);
             ArrayList<Room> roomsToShow = new ArrayList<>();
