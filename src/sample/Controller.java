@@ -29,7 +29,6 @@ public class Controller implements Initializable {
     public String from;
     public String to;
 
-    private DatabaseMock data_old = new DatabaseMock(new DataFactory().getAllHotels());
     private DatabaseConnection data = new DatabaseConnection();
 
     private AccommodationSearchController searchController = new AccommodationSearchController(data);
@@ -188,8 +187,12 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL LOCATION, ResourceBundle resources) {
-
-        accommodationsShown = data.getAllHotels();
+        try {
+            data.initializeDatabase();
+            accommodationsShown = data.getAllHotels();
+        } catch(Exception e) {
+            System.err.println(e);
+        }
         hotelList.setItems(FXCollections.observableArrayList(accommodationsShown));
     }
 }
