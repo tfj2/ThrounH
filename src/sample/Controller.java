@@ -138,7 +138,7 @@ public class Controller implements Initializable {
         int place = 0;
         if (theHotel != null) {
             for (int count = 0; count < theHotel.getAllRooms().size(); count++) {
-                if (theHotel.getAllRooms().get(count).toString() == theRoom.toString()) {
+                if (theRoom != null && theHotel.getAllRooms().get(count).toString() == theRoom.toString()) {
                     place = count;
                 }
             }

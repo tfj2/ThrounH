@@ -6,6 +6,7 @@ import storage.DatabaseMock;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Accommodation {
     private int id;
@@ -163,6 +164,24 @@ public class Accommodation {
 
     public String toString() {
         return this.name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // self check
+        if (this == o)
+            return true;
+
+        // null check
+        if (o == null)
+            return false;
+
+        // type check and cast
+        if(getClass() != o.getClass())
+            return false;
+        // field comparison
+        return Objects.equals(id, ((Accommodation) o).id) && ((Accommodation) o).getName().equals(name);
+
     }
 
     public static void main(String[] args) {
