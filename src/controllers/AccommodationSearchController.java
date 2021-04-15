@@ -106,9 +106,7 @@ public class AccommodationSearchController {
 
             // finnum sniðmengi af þeim results úr queries sem innihalda ekki tóma strenginn (eða null í Date)
             // munum alltaf nota minRating og maxPrice, g.r.f. 0 og inf default gildum ef ekki á að leita eftir því
-            System.out.println(ratingResult);
             theResult.retainAll(ratingResult);
-            System.out.println("Result2>>" + theResult + "\n \n");
             if (!location.equals("")) {
                 System.out.println("location");
                 theResult.retainAll(locationResult);
