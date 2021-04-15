@@ -99,13 +99,10 @@ public class AccommodationSearchController {
         // init
         try {
             ArrayList<Accommodation> theResult = new ArrayList<>(data.getAllHotels());
-            System.out.print("Result>>" + theResult + "\n \n");
-            System.out.println("");
+
             ArrayList<Accommodation> nameResult = findByName(name);
             ArrayList<Accommodation> locationResult = findByLocation(location);
             ArrayList<Accommodation> ratingResult = findByRating(minRating);
-
-
 
             // finnum sniðmengi af þeim results úr queries sem innihalda ekki tóma strenginn (eða null í Date)
             // munum alltaf nota minRating og maxPrice, g.r.f. 0 og inf default gildum ef ekki á að leita eftir því
@@ -120,7 +117,7 @@ public class AccommodationSearchController {
                 System.out.println("name");
                 theResult.retainAll(nameResult);
             }
-            System.out.println(theResult);
+
             return theResult;
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -131,10 +128,12 @@ public class AccommodationSearchController {
     public static void main(String[] args) {
         DatabaseConnection data = new DatabaseConnection();
         AccommodationSearchController sc = new AccommodationSearchController(data);
-        System.out.println(sc.findByLocation("reykjavik"));
-        System.out.println(sc.findByName("hotel"));
-        System.out.println(sc.findByRating(0.0));
-        System.out.println(sc.search("reykjavik", 0.0, "hotel"));
+
+        try {
+            System.out.println(sc.search("reykjavik", 0.0, "hotel"));
+        } catch(Exception e) {
+            System.err.println(e);
+        }
 
     }
 }
