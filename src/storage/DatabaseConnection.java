@@ -348,6 +348,14 @@ public class DatabaseConnection implements Database {
             System.err.println(e.getMessage());
         }
         System.out.println("Test4");
+        try {
+            ArrayList<Accommodation> garg = connection.getHotelsByRating(5.0);
+            for (Accommodation hotel : garg) {
+                System.out.println(hotel.toString());
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
 }

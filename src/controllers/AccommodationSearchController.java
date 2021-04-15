@@ -99,14 +99,16 @@ public class AccommodationSearchController {
         // init
         try {
             ArrayList<Accommodation> theResult = new ArrayList<>(data.getAllHotels());
+
             ArrayList<Accommodation> nameResult = findByName(name);
             ArrayList<Accommodation> locationResult = findByLocation(location);
             ArrayList<Accommodation> ratingResult = findByRating(minRating);
 
             // finnum sniðmengi af þeim results úr queries sem innihalda ekki tóma strenginn (eða null í Date)
             // munum alltaf nota minRating og maxPrice, g.r.f. 0 og inf default gildum ef ekki á að leita eftir því
+            System.out.println(ratingResult);
             theResult.retainAll(ratingResult);
-
+            System.out.println("Result2>>" + theResult + "\n \n");
             if (!location.equals("")) {
                 System.out.println("location");
                 theResult.retainAll(locationResult);
@@ -126,10 +128,12 @@ public class AccommodationSearchController {
     public static void main(String[] args) {
         DatabaseConnection data = new DatabaseConnection();
         AccommodationSearchController sc = new AccommodationSearchController(data);
+
         try {
             System.out.println(sc.search("reykjavik", 0.0, "hotel"));
         } catch(Exception e) {
             System.err.println(e);
         }
+
     }
 }
