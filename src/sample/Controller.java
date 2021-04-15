@@ -12,9 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import storage.DataFactory;
 import storage.DatabaseConnection;
-import storage.DatabaseMock;
 
 import java.net.URL;
 import java.sql.Date;

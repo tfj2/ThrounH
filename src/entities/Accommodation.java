@@ -1,7 +1,7 @@
 package entities;
 
 import controllers.AccommodationSearchController;
-import storage.DataFactory;
+import storage.DatabaseSetup;
 import storage.DatabaseMock;
 
 import java.sql.Date;
@@ -166,7 +166,7 @@ public class Accommodation {
     }
 
     public static void main(String[] args) {
-        DatabaseMock data = new DatabaseMock(new DataFactory().pumpIntoDatabase());
+        DatabaseMock data = new DatabaseMock(new DatabaseSetup().pumpIntoDatabase());
         AccommodationSearchController searchController = new AccommodationSearchController(data);
 
         Accommodation hotelPig = data.getAllHotels().get(2);

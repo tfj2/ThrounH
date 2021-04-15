@@ -49,6 +49,12 @@ public class Room {
         this.roomType = roomType;
         occupancies = new ArrayList<>();
     }
+    public Room(double price, RoomType roomType, int cap) {
+      this.price = price;
+      this.cap = cap;
+      this.roomType = roomType;
+      occupancies = new ArrayList<>();
+  }
 
     public boolean isAvailable(Date date) {
         for (Occupancy occupancy : occupancies) {
@@ -68,7 +74,7 @@ public class Room {
     }
 
     public String toString() {
-        return roomType.toString() + ", kr. " + getPrice();
+        return roomType.toString() + ", $USD " + getPrice();
     }
 
     public static void main(String[] args) {
