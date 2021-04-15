@@ -1,6 +1,7 @@
 package storage;
 
 import entities.Accommodation;
+import entities.Occupancy;
 import entities.Room;
 import entities.RoomType;
 
@@ -21,6 +22,8 @@ public class DatabaseConnection implements Database {
     public DatabaseConnection() {
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:hotel.db");
+
+            //initializeDatabase();
         } catch (Exception e) {
             System.err.println(e.getMessage());
         } finally {
@@ -276,6 +279,38 @@ public class DatabaseConnection implements Database {
         return res;
     }
 
+    public void createOccupancy(int roomId, Date from, Date to) throws Exception {
+        getConnection();
+        String q = "INSERT INTO Occupancy "
+                + "(roomId, dateFrom, dateTo)"
+                + "VALUES (?,?,?)";
+        PreparedStatement pstmt = conn.prepareStatement(q);
+        pstmt.setInt(1, roomId);
+        pstmt.setDate(2, from);
+        pstmt.setDate(3, to);
+        pstmt.executeUpdate();
+        pstmt.close();
+        closeConnection();
+    }
+
+    public ArrayList<Occupancy> getAllOccupanciesByRoomId(int roomId) throws Exception {
+        getConnection();
+        String q = "SELECT * FROM Occupancy WHERE roomId = ?";
+        PreparedStatement pstmt = conn.prepareStatement(q);
+        pstmt.setInt(1, roomId);
+        ResultSet rs = pstmt.executeQuery();
+        ArrayList<Occupancy> res = new ArrayList<>();
+        while (rs.next()) {
+            Occupancy occ = new Occupancy(
+                    rs.getDate("dateFrom"),
+                    rs.getDate("dateTo")
+            );
+            res.add(occ);
+        }
+        rs.close();
+        closeConnection();
+        return res;
+    }
 
     public static void main(String[] args) throws Exception {
         DatabaseConnection connection = new DatabaseConnection();
@@ -312,6 +347,7 @@ public class DatabaseConnection implements Database {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+        System.out.println("Test4");
     }
 
 }

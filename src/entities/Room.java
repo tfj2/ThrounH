@@ -1,5 +1,7 @@
 package entities;
 
+import storage.DatabaseConnection;
+
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -42,6 +44,10 @@ public class Room {
         this.cap = cap;
     }
 
+    public void setOccupancies(ArrayList<Occupancy> occupancies) {
+        this.occupancies = occupancies;
+    }
+
     public Room(int roomId, double price, RoomType roomType, int cap) {
         this.roomId = roomId;
         this.price = price;
@@ -66,10 +72,24 @@ public class Room {
     }
 
     public void addOccupancy(Occupancy occupancy) {
+        DatabaseConnection connection = new DatabaseConnection();
+        try {
+            connection.createOccupancy(this.roomId, occupancy.getDateFrom(), occupancy.getDateTo());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
         occupancies.add(occupancy);
     }
 
     public ArrayList<Occupancy> getOccupancies() {
+        DatabaseConnection connection = new DatabaseConnection();
+        ArrayList<Occupancy> dbList = new ArrayList<>();
+        try {
+            dbList = connection.getAllOccupanciesByRoomId(this.roomId);
+            setOccupancies(dbList);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
         return occupancies;
     }
 
