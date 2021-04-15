@@ -22,6 +22,7 @@ public class DatabaseConnection implements Database {
     public DatabaseConnection() {
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:hotel.db");
+
             //initializeDatabase();
         } catch (Exception e) {
             System.err.println(e.getMessage());

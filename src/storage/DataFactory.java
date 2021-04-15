@@ -6,10 +6,10 @@ import entities.RoomType;
 
 import java.util.ArrayList;
 
-public class DataFactory /*implements Database*/ {
+public class DataFactory  {
     public DataFactory() {
     }
-    public ArrayList<Accommodation> getAllHotels() {
+    public ArrayList<Accommodation> pumpIntoDatabase() {
         DatabaseConnection db = new DatabaseConnection();
         try {
             db.initializeDatabase();
@@ -260,6 +260,6 @@ public class DataFactory /*implements Database*/ {
 
     public static void main(String[] args) {
         DataFactory df = new DataFactory();
-        df.getAllHotels();
+        df.pumpIntoDatabase();
     }
 }

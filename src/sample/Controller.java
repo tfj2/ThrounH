@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import storage.DatabaseConnection;
 
+
 import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -30,7 +31,6 @@ public class Controller implements Initializable {
     public String from;
     public String to;
 
-    //private DatabaseMock data = new DatabaseMock(new DataFactory().getAllHotels());
     private DatabaseConnection data = new DatabaseConnection();
 
     private AccommodationSearchController searchController = new AccommodationSearchController(data);

@@ -166,7 +166,7 @@ public class Accommodation {
     }
 
     public static void main(String[] args) {
-        DatabaseMock data = new DatabaseMock(new DataFactory().getAllHotels());
+        DatabaseMock data = new DatabaseMock(new DataFactory().pumpIntoDatabase());
         AccommodationSearchController searchController = new AccommodationSearchController(data);
 
         Accommodation hotelPig = data.getAllHotels().get(2);
