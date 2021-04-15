@@ -9,8 +9,6 @@ import java.util.ArrayList;
 public class DataFactory /*implements Database*/ {
     public DataFactory() {
     }
-
-
     public ArrayList<Accommodation> getAllHotels() {
         DatabaseConnection db = new DatabaseConnection();
         try {

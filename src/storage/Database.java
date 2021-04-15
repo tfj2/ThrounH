@@ -4,6 +4,7 @@ import entities.Accommodation;
 
 import java.util.ArrayList;
 
+
 public interface Database {
     ArrayList<Accommodation> getAllHotels() throws Exception;
 
@@ -12,5 +13,6 @@ public interface Database {
     ArrayList<Accommodation> getHotelsByRating(double minRating) throws Exception;
 
     ArrayList<Accommodation> getHotelsByName(String name) throws Exception;
+
 }
 
