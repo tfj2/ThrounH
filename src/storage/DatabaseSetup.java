@@ -345,7 +345,7 @@ public class DatabaseSetup {
         accommodations.add(acc14);
         return accommodations;
     }
-    
+
     public static void main(String[] args) {
         DatabaseSetup df = new DatabaseSetup();
         df.pumpIntoDatabase();
