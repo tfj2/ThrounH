@@ -60,7 +60,7 @@ public class Controller implements Initializable {
 
     @FXML
     public void searchButtonPressed() {
-        ArrayList<Accommodation> hotelsResult;
+        ArrayList<Accommodation> hotelsResult = null;
 
         // default gildi
         double minRating = 0.0;
@@ -78,7 +78,7 @@ public class Controller implements Initializable {
 
         // uppfærum room list þannig það sýni herbergi úr fyrsta hotelið í leit:
 
-
+        System.out.println(hotelsResult);
         if (hotelsResult != null) {
             Accommodation theHotel = hotelsResult.get(0);
             ArrayList<Room> roomsToShow = new ArrayList<>();

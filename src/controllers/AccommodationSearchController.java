@@ -3,6 +3,7 @@ package controllers;
 import entities.Accommodation;
 import entities.Room;
 import storage.Database;
+import storage.DatabaseConnection;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -75,7 +76,7 @@ public class AccommodationSearchController {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        return null; /// sama og hitt!! aLAGA
+        return new ArrayList<>(); /// sama og hitt!! aLAGA
 
     }
 
@@ -98,12 +99,14 @@ public class AccommodationSearchController {
         // init
         try {
             ArrayList<Accommodation> theResult = new ArrayList<>(data.getAllHotels());
+            System.out.print(theResult);
+            System.out.println("");
             ArrayList<Accommodation> nameResult = findByName(name);
             ArrayList<Accommodation> locationResult = findByLocation(location);
             ArrayList<Accommodation> ratingResult = findByRating(minRating);
 
 
-            System.out.println(ratingResult);
+            System.out.println(theResult);
             // finnum sniðmengi af þeim results úr queries sem innihalda ekki tóma strenginn (eða null í Date)
             // munum alltaf nota minRating og maxPrice, g.r.f. 0 og inf default gildum ef ekki á að leita eftir því
             theResult.retainAll(ratingResult);
@@ -116,7 +119,7 @@ public class AccommodationSearchController {
                 System.out.println("name");
                 theResult.retainAll(nameResult);
             }
-
+            System.out.println(theResult);
             return theResult;
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -125,6 +128,15 @@ public class AccommodationSearchController {
     }
 
     public static void main(String[] args) {
-
+        DatabaseConnection data = new DatabaseConnection();
+        AccommodationSearchController sc = new AccommodationSearchController(data);
+        try {
+            System.out.println(sc.findByLocation("reykjavik"));
+            System.out.println(sc.findByName("hotel"));
+            System.out.println(sc.findByRating(0.0));
+            System.out.println(sc.search("reykjavik", 0.0, "hotel"));
+        } catch(Exception e) {
+            System.err.println(e);
+        }
     }
 }
