@@ -1,7 +1,7 @@
-Þróun hugbúnaðar, Team 6H, Spring 2021.
+Þróun hugbúnaðar, Team 6H, Spring 2021.\
 dha7@hi.is\
 oat3@hi.is\
-tfj2@hi.is\
+tfj2@hi.is
 
 libs:
 sqlite-jdbc-3.32.3.2\
