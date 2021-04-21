@@ -55,12 +55,13 @@ public class Room {
         this.roomType = roomType;
         occupancies = new ArrayList<>();
     }
+
     public Room(double price, RoomType roomType, int cap) {
-      this.price = price;
-      this.cap = cap;
-      this.roomType = roomType;
-      occupancies = new ArrayList<>();
-  }
+        this.price = price;
+        this.cap = cap;
+        this.roomType = roomType;
+        occupancies = new ArrayList<>();
+    }
 
     public boolean isAvailable(Date date) {
         for (Occupancy occupancy : occupancies) {
@@ -79,6 +80,16 @@ public class Room {
             System.err.println(e.getMessage());
         }
         occupancies.add(occupancy);
+    }
+
+    public void removeOccupancy(int roomId, Date from, Date to) {
+        DatabaseConnection connection = new DatabaseConnection();
+        try {
+            connection.deleteOccupancy(roomId, from, to);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        getOccupancies();
     }
 
     public ArrayList<Occupancy> getOccupancies() {
